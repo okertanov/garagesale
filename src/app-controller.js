@@ -34,6 +34,9 @@ exports.AppController =
                 switch(req.method)
                 {
                     case 'GET':
+                        var resp = 'GET: ' + req;
+                        res.writeHead(200, {'Content-Type':'text/plain'});
+                        res.end(resp);
                         console.log(req.method, req.body);
                     break;
                     case 'PUT':
