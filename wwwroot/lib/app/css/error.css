@@ -1,3 +1,7 @@
+/*
+    @copyright  Copyright (C) 2012 Oleg Kertanov <okertanov@gmail.com>
+*/
+
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 html { padding: 30px 10px; font-size: 20px; line-height: 1.4; color: #737373; background: #f0f0f0;
