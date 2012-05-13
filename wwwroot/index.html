@@ -32,6 +32,14 @@
     <script type="text/javascript" src="/lib/backbone/backbone.min.js"></script>
 
     <script type="text/javascript" src="/lib/app/js/application.js"></script>
+
+    <!-- Bootstrap the Application -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            Garage.application = new Garage.Application();
+            Garage.application.Initialize();
+        });
+    </script>
 </head>
 
 <body>

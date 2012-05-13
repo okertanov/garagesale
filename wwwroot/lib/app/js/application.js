@@ -185,5 +185,5 @@ exports.Application = function()
     };
 };
 
-})(jQuery, underscore, backbone, (typeof exports !== 'undefined' ? exports : this['Garage'] = {}));
+})(jQuery, _, backbone, (typeof exports !== 'undefined' ? exports : this['Garage'] = {}));
 
