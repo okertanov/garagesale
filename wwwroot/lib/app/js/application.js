@@ -13,7 +13,7 @@
     @brief IIFE
     @see https://developer.mozilla.org/en/JavaScript/Reference/Operators/function
 */
-(function($, _, backbone, exports)
+(function($, _, Backbone, exports)
 {
 
 /**
@@ -185,5 +185,5 @@ exports.Application = function()
     };
 };
 
-})(jQuery, _, backbone, (typeof exports !== 'undefined' ? exports : this['Garage'] = {}));
+})(jQuery, _, Backbone, (typeof exports !== 'undefined' ? exports : this['Garage'] = {}));
 
