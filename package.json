@@ -1,0 +1,18 @@
+{
+    "name" : "garagesale-server",
+        "description" : "The node server to host the advertising garage sale sites.",
+        "version" : "0.1.1",
+        "author" : "Oleg Kertanov <okertanov@gmail.com>",
+        "engines" : ["node"],
+        "repository" :
+        {
+            "type":"git",
+            "url":"https://github.com/okertanov/garagesale"
+        },
+        "dependencies" :
+        {
+            "connect" :   ">=2.2.0",
+            "express" :   ">=2.5.0",
+            "socket.io" : ">=0.9.0"
+        }
+}
