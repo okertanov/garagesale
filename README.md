@@ -34,3 +34,18 @@ Server
     sudo aptitude install mongodb
 #### varnish
 
+Deploy
+------
+    cd /srv/git
+    sudo git --bare init --shared garagesale.git
+    sudo chown -R okertanov:developers garagesale.git
+    cd garagesale.git
+    git update-server-info
+
+    sudo vim /srv/git/garagesale.git/hooks/post-receive
+    sudo chmod 755 /srv/git/garagesale.git/hooks/post-receive
+
+    cd /srv/www
+    sudo git clone /srv/git/garagesale.git garage.espectrale.com
+    sudo chown -R okertanov:okertanov garage.espectrale.com
+
