@@ -4,16 +4,14 @@
 MODULE_NAME := garagesale
 
 SRC_DIR  := src
-SERVER   := server.js
+SERVER   := $(SRC_DIR)/server.js
 
 PID_FILE := log/run.pid
 OUT_FILE := log/output.log
 ERR_FILE := log/error.log
 LOG_FILE := log/run.log
 
-FRV_OPTIONS = --pidFile $(PID_FILE) --sourceDir $(SRC_DIR) \
-              --watch --watchDirectory $(SRC_DIR) \
-              --append -l $(LOG_FILE) -e $(ERR_FILE) -o $(OUT_FILE)
+FRV_OPTIONS = --watch --watchDirectory $(SRC_DIR)
 
 all:
 	-@echo "------------------------------------------------"
