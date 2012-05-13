@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /srv/www/garage.espectrale.com || exit
+make update
+
