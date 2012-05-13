@@ -8,8 +8,8 @@ all:
 clean:
 
 update:
-	env -i git pull --ff-only --force origin
-	env -i git submodule update --init --recursive
+	@env -i git pull --ff-only --force origin
+	@env -i git submodule update --init --recursive
 
 .DEFAULT: all
 
