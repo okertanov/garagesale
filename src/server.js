@@ -48,9 +48,9 @@ ApiController.Route(app);
 // Server
 app.listen(Port);
 
-process.on('exit', function () {
-    ApiController.Terminate();
-});
+process.on('exit, uncaughtException, SIGINT', function () {
+        ApiController.Terminate();
+    });
 
 })()
 
