@@ -58,6 +58,7 @@ process
     })
     .on('SIGINT', function () {
         ApiController.Terminate();
+        process.exit();
     });
 
 })()
