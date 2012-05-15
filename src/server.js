@@ -19,11 +19,10 @@
 var os      = require('os'),
     fs      = require('fs'),
     path    = require('path'),
-    connect = require('connect'),
-    http    = require('http');
+    express = require('express');
 
 // App modules
-var AppController = require('./app-controller.js').AppController;
+var ApiController = require('./api-controller.js').ApiController;
 
 // Pathes
 var ServerRoot  = __filename,
@@ -33,35 +32,22 @@ var ServerRoot  = __filename,
 // Configuration
 var Port = 8882;
 
-// Connect2 application
-var app = connect()
-    .use(connect.logger('dev'))
-    .use(connect.urlencoded())
-    .use(connect.multipart())
-    .use(connect.query())
-    .use('/app', AppController.Route(connect))
-    .use(connect.favicon())
-    .use(connect.static(WWWRoot))
-    .use(function(err, req, res, next)
-    {
-        var resp = '';
+// Express application
+var app = express.createServer();
 
-        if ( err )
-        {
-            resp = "error";
-            console.log(err);
-        }
-        else
-        {
-            resp = "OK";
-        }
+app.configure(function () {
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(app.router);
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
 
-        res.writeHead(200, {'Content-Type':'text/plain'});
-        res.end(resp);
-    });
+app.get('/api', function (req, res) {
+  res.send('Ecomm API is running');
+});
 
-// HTTPS server
-http.createServer(app).listen(Port);
+// Server
+app.listen(Port);
 
 })()
 

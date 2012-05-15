@@ -30,22 +30,16 @@ Architecture
     /lib
     /img
     /static
-
-### Note app
-    /app/garage/:cat
-    /app/item/:id
-    /app/user/:id
-    /app/admin
+    /admin
 
 ### API
-    /api/v1/garage/:cat
-    /api/v1/item/:id
-    /api/v1/user/:id
-    /api/v1/admin/:action/:id
+    /api/garage/:cat
+    /api/item/:id
+    /api/user/:id
+    /api/admin/:action/:id
 
 Server
 ------
-
 ### Node.js & NPM
     sudo apt-get install python-software-properties
     sudo apt-add-repository ppa:chris-lea/node.js
