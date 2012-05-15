@@ -23,7 +23,7 @@ exports.Category = new mongoose.Schema({
 
 exports.ApiDb =
 {
-    Connetc: function(db)
+    Connect: function(db)
     {
         console.log('ApiDb.Connetc');
 
