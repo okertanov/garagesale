@@ -116,9 +116,9 @@ exports.ApiController =
     },
     Default: function(req, res, next)
     {
-        console.log('ApiController.Default');
+        console.log('ApiController.Default', req.method, req.query);
 
-        res.send('Invalid API', 501);
+        res.send('Invalid API: ' + req.method + ' / ' + req.query, 501);
     },
     SendJson: function(res, content)
     {
@@ -144,7 +144,7 @@ exports.ApiController =
         // -- admin interface (with the same options)
         app.get(    '/api/admin/:obj/*',    function(req, res, next){ that.Admin.call(that, req, res, next); }                     );
         // -- Other
-        app.get(    '/*',                   function(req, res, next){ that.Default.call(that, req, res, next); }                     );
+        app.all(    '/*',                   function(req, res, next){ that.Default.call(that, req, res, next); }                     );
 
         return this;
     }
