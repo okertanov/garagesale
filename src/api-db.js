@@ -45,7 +45,7 @@ exports.ApiDb =
 
         try
         {
-            mongoose.close();
+            mongoose.connection.close();
         }
         catch(e)
         {
