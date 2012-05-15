@@ -31,10 +31,7 @@ exports.ApiController =
 
         res.contentType('application/json');
 
-        var response = 'Request: \n' + JSON.stringify(req) + '\n' +
-                       'Response: \n' + JSON.stringify(res) + '\n' +
-
-        res.send(response);
+        res.json(req);
     },
     Category: function(req, res, next)
     {
@@ -42,10 +39,7 @@ exports.ApiController =
 
         res.contentType('application/json');
 
-        var response = 'Request: \n' + JSON.stringify(req) + '\n' +
-                       'Response: \n' + JSON.stringify(res) + '\n' +
-
-        res.send(response);
+        res.json(req);
     },
     Item: function(req, res, next)
     {
@@ -53,10 +47,7 @@ exports.ApiController =
 
         res.contentType('application/json');
 
-        var response = 'Request: \n' + JSON.stringify(req) + '\n' +
-                       'Response: \n' + JSON.stringify(res) + '\n' +
-
-        res.send(response);
+        res.json(req);
     },
     Admin: function(req, res, next)
     {
@@ -64,10 +55,7 @@ exports.ApiController =
 
         res.contentType('application/json');
 
-        var response = 'Request: \n' + JSON.stringify(req) + '\n' +
-                       'Response: \n' + JSON.stringify(res) + '\n' +
-
-        res.send(response);
+        res.json(req);
     },
     Route: function(app)
     {
