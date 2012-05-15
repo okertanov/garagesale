@@ -54,10 +54,18 @@ exports.ApiController =
     CategoriesCreateCategory: function(req, res, next)
     {
         console.log('ApiController.Category');
+        
+        var that  = this,
+            name  = req.params.name,
+            descr = req.params.description,
+            cat   = new ApiDb.Category({name: name, description: descr, type: 'user'});
 
-        var response = JSON.stringify({});
-
-        this.SendJson(res, response);
+        cat.save(function(err){
+            if ( !err )
+                that.SendJson(res, cat);
+            else
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+        });
     },
     CategoryGet: function(req, res, next)
     {
@@ -145,21 +153,23 @@ exports.ApiController =
         var that = this;
 
         // -- all categories in the garage (list)
-        app.get(    '/api/categories',       function(req, res, next){ that.CategoriesGet.call(that, req, res, next); }             );
-        app.put(    '/api/categories',       function(req, res, next){ that.CategoriesCreateCategory.call(that, req, res, next); }  );
+        app.get(    '/api/categories',      function(req, res, next){ that.CategoriesGet.call(that, req, res, next); }             );
+        app.get(    '/api/categories/:name/:description',
+                                            function(req, res, next){ that.CategoriesCreateCategory.call(that, req, res, next); }  );
+        app.put(    '/api/categories',      function(req, res, next){ that.CategoriesCreateCategory.call(that, req, res, next); }  );
         // -- single category (just info on the category)
-        app.get(    '/api/category/:cat',    function(req, res, next){ that.CategoryGet.call(that, req, res, next); }               );
-        app.put(    '/api/category/:cat',    function(req, res, next){ that.CategoryCreateItem.call(that, req, res, next); }        );
-        app.post(   '/api/category/:cat',    function(req, res, next){ that.CategoryEdit.call(that, req, res, next); }              );
-        app.delete( '/api/category/:cat',    function(req, res, next){ that.CategoryDelete.call(that, req, res, next); }            );
+        app.get(    '/api/category/:cat',   function(req, res, next){ that.CategoryGet.call(that, req, res, next); }               );
+        app.put(    '/api/category/:cat',   function(req, res, next){ that.CategoryCreateItem.call(that, req, res, next); }        );
+        app.post(   '/api/category/:cat',   function(req, res, next){ that.CategoryEdit.call(that, req, res, next); }              );
+        app.delete( '/api/category/:cat',   function(req, res, next){ that.CategoryDelete.call(that, req, res, next); }            );
         // -- single item in category or filter (including 'all', and fuzzy queries)
-        app.get(    '/api/item/:cat/:id',    function(req, res, next){ that.ItemGet.call(that, req, res, next); }                   );
-        app.post(   '/api/item/:cat/:id',    function(req, res, next){ that.ItemEdit.call(that, req, res, next); }                  );
-        app.delete( '/api/item/:cat/:id',    function(req, res, next){ that.ItemDelete.call(that, req, res, next); }                );
+        app.get(    '/api/item/:cat/:id',   function(req, res, next){ that.ItemGet.call(that, req, res, next); }                   );
+        app.post(   '/api/item/:cat/:id',   function(req, res, next){ that.ItemEdit.call(that, req, res, next); }                  );
+        app.delete( '/api/item/:cat/:id',   function(req, res, next){ that.ItemDelete.call(that, req, res, next); }                );
         // -- admin interface (with the same options)
-        app.get(    '/api/admin/:obj/*',     function(req, res, next){ that.Admin.call(that, req, res, next); }                     );
+        app.get(    '/api/admin/:obj/*',    function(req, res, next){ that.Admin.call(that, req, res, next); }                     );
         // -- Other
-        app.all(    '/*',                    function(req, res, next){ that.Default.call(that, req, res, next); }                   );
+        app.all(    '/*',                   function(req, res, next){ that.Default.call(that, req, res, next); }                   );
 
         return this;
     }
