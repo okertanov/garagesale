@@ -40,7 +40,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     CategoriesCreateCategory: function(req, res, next)
     {
@@ -48,7 +48,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     CategoryGet: function(req, res, next)
     {
@@ -56,7 +56,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     CategoryCreateItem: function(req, res, next)
     {
@@ -64,7 +64,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     CategoryEdit: function(req, res, next)
     {
@@ -72,7 +72,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     CategoryDelete: function(req, res, next)
     {
@@ -80,7 +80,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     ItemGet: function(req, res, next)
     {
@@ -88,7 +88,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     ItemEdit: function(req, res, next)
     {
@@ -96,7 +96,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     ItemDelete: function(req, res, next)
     {
@@ -104,7 +104,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     Admin: function(req, res, next)
     {
@@ -112,7 +112,7 @@ exports.ApiController =
 
         var response = JSON.stringify({});
 
-        this.SendJson(response);
+        this.SendJson(res, response);
     },
     SendJson: function(res, content)
     {

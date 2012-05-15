@@ -25,7 +25,7 @@ exports.ApiDb =
 {
     Connect: function(db)
     {
-        console.log('ApiDb.Connetc');
+        console.log('ApiDb.Connect');
 
         try
         {
