@@ -43,11 +43,12 @@ exports.ApiController =
     {
         console.log('ApiController.Categories');
         
+        var that = this;
         ApiDb.Category.find({}, function(err, data){
             if ( !err )
-                this.SendJson(res, data);
+                that.SendJson(res, data);
             else
-                this.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
         });
     },
     CategoriesCreateCategory: function(req, res, next)
