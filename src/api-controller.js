@@ -15,7 +15,8 @@
 // Strict mode by default
 "use strict";
 
-var underscore = require('underscore')._;
+var mongoose = require('mongoose'),
+    underscore = require('underscore')._;
 
 function IsEmptyObject(o)
 {
@@ -24,6 +25,65 @@ function IsEmptyObject(o)
 
 exports.ApiController =
 {
+    Categories: function(req, res, next)
+    {
+        console.log('ApiController.Categories');
+
+        res.contentType('application/json');
+
+        var response = 'Request: \n' + JSON.stringify(req) + '\n' +
+                       'Response: \n' + JSON.stringify(res) + '\n' +
+
+        res.send(response);
+    },
+    Category: function(req, res, next)
+    {
+        console.log('ApiController.Category');
+
+        res.contentType('application/json');
+
+        var response = 'Request: \n' + JSON.stringify(req) + '\n' +
+                       'Response: \n' + JSON.stringify(res) + '\n' +
+
+        res.send(response);
+    },
+    Item: function(req, res, next)
+    {
+        console.log('ApiController.Item');
+
+        res.contentType('application/json');
+
+        var response = 'Request: \n' + JSON.stringify(req) + '\n' +
+                       'Response: \n' + JSON.stringify(res) + '\n' +
+
+        res.send(response);
+    },
+    Admin: function(req, res, next)
+    {
+        console.log('ApiController.Admin');
+
+        res.contentType('application/json');
+
+        var response = 'Request: \n' + JSON.stringify(req) + '\n' +
+                       'Response: \n' + JSON.stringify(res) + '\n' +
+
+        res.send(response);
+    },
+    Route: function(app)
+    {
+        // -- all categories in the garage (list)
+        app.all('/api/garage',                  this.Categories);
+        // -- single category (just info on the category)
+        app.all('/api/garage/:cat',             this.Category);
+        // -- items in category by filter (including 'all', and fuzzy queries)
+        app.all('/api/garage/:cat/filter/:f',   this.Items);
+        // -- single item in category
+        app.all('/api/garage/:cat/:id',         this.Item);
+        // -- admin interface (with the same options)
+        app.all('/api/admin',                   this.Admin);
+
+        return this;
+    }
 };
 
 })()

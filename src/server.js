@@ -42,9 +42,7 @@ app.configure(function () {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-app.get('/api', function (req, res) {
-  res.send('Ecomm API is running');
-});
+ApiController.Route(app);
 
 // Server
 app.listen(Port);
