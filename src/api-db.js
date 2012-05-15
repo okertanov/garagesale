@@ -30,7 +30,7 @@ exports.ApiDb =
         try
         {
             if ( !db || !db.length )
-                throw 'ApiModels.Connetc invalid argument';
+                throw 'ApiModels.Connect invalid argument';
             mongoose.connect('mongodb://localhost/' + db);
         }
         catch(e)

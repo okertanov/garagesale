@@ -16,7 +16,8 @@
 "use strict";
 
 var underscore = require('underscore')._,
-    Db = require('./api-db.js').ApiDb;
+    Db = require('./api-db.js').ApiDb,
+    DbName = 'garage';
 
 function IsEmptyObject(o)
 {
@@ -27,7 +28,7 @@ exports.ApiController =
 {
     Initialize: function()
     {
-        Db.Connect();
+        Db.Connect(DbName);
     },
     Terminate: function()
     {
