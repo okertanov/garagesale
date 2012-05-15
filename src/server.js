@@ -53,8 +53,7 @@ process
         ApiController.Terminate();
     })
     .on('uncaughtException', function (e){
-        ApiController.Terminate();
-        throw e;
+        console.log(e, e.toString());
     })
     .on('SIGINT', function () {
         ApiController.Terminate();
