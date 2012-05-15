@@ -45,9 +45,9 @@ exports.ItemSchema = new Schema({
 
 exports.ApiDb =
 {
-    User: mongoose.model('UserModel', UserSchema),
-    Item: mongoose.model('ItemModel', UserSchema),
-    Category: mongoose.model('CategoryModel', UserSchema),
+    User: mongoose.model('UserModel', exports.UserSchema),
+    Item: mongoose.model('ItemModel', ItemSchema),
+    Category: mongoose.model('CategoryModel', CategorySchema),
     Connect: function(db)
     {
         console.log('ApiDb.Connect');
