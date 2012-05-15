@@ -17,12 +17,37 @@
 
 var mongoose = require('mongoose');
 
-exports.Category = new mongoose.Schema({
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
+exports.UserSchema = new Schema({
+    name:           { type: String,   required: true  },
+    fullname:       { type: String,   required: false },
+    info:           { type: String,   required: false },
+    isadmin:        { type: Boolean,  required: true  },
+});
+
+exports.CategorySchema = new Schema({
+    name:           { type: String,   required: true  },
+    description:    { type: String,   required: false },
+    type:           { type: String,   required: true,
+                        enum: ['system', 'user', 'special']
+                    }
+});
+
+exports.ItemSchema = new Schema({
+    name:           { type: String,     required: true  },
+    description:    { type: String,     required: false },
+    images:         { type: [String],   required: false },
+    user:           { type: ObjectId,   required: true  },
+    categories:     { type: [ObjectId], required: true  },
 });
 
 exports.ApiDb =
 {
+    User: mongoose.model('UserModel', UserSchema),
+    Item: mongoose.model('ItemModel', UserSchema),
+    Category: mongoose.model('CategoryModel', UserSchema),
     Connect: function(db)
     {
         console.log('ApiDb.Connect');

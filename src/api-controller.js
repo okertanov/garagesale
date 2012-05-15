@@ -16,7 +16,8 @@
 "use strict";
 
 var underscore = require('underscore')._,
-    Db = require('./api-db.js').ApiDb,
+    Db = require('./api-db.js'),
+    ApiDb = Db.ApiDb,
     DbName = 'garage';
 
 function IsEmptyObject(o)
@@ -30,21 +31,24 @@ exports.ApiController =
     {
         console.log('ApiController.Initialize');
 
-        Db.Connect(DbName);
+        ApiDb.Connect(DbName);
     },
     Terminate: function()
     {
         console.log('ApiController.Terminate');
 
-        Db.Disconnect();
+        ApiDb.Disconnect();
     },
     CategoriesGet: function(req, res, next)
     {
         console.log('ApiController.Categories');
-
-        var response = JSON.stringify({});
-
-        this.SendJson(res, response);
+        
+        ApiDb.Category.find({}, (function(err, data){
+            if ( !err )
+                this.SendJson(res, data);
+            else
+                this.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+        });
     },
     CategoriesCreateCategory: function(req, res, next)
     {
@@ -122,12 +126,16 @@ exports.ApiController =
     {
         console.log('ApiController.Default', req.method, req.url);
 
-        res.send('Invalid API: ' + req.method + ' ' + req.url, 501);
+        this.SendError(res, 'Invalid API: ' + req.method + ' ' + req.url, 501);
     },
     SendJson: function(res, content)
     {
         res.contentType('application/json').json(content);
         return this;
+    },
+    SendError: function(res, content, code)
+    {
+        res.send(content, code);
     },
     Route: function(app)
     {
@@ -148,9 +156,9 @@ exports.ApiController =
         app.post(   '/api/item/:cat/:id',    function(req, res, next){ that.ItemEdit.call(that, req, res, next); }                  );
         app.delete( '/api/item/:cat/:id',    function(req, res, next){ that.ItemDelete.call(that, req, res, next); }                );
         // -- admin interface (with the same options)
-        app.get(    '/api/admin/:obj/*',    function(req, res, next){ that.Admin.call(that, req, res, next); }                     );
+        app.get(    '/api/admin/:obj/*',     function(req, res, next){ that.Admin.call(that, req, res, next); }                     );
         // -- Other
-        app.all(    '/*',                   function(req, res, next){ that.Default.call(that, req, res, next); }                     );
+        app.all(    '/*',                    function(req, res, next){ that.Default.call(that, req, res, next); }                   );
 
         return this;
     }
