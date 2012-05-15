@@ -122,7 +122,7 @@ exports.ApiController =
     {
         console.log('ApiController.Default', req.method, req.url);
 
-        res.send('Invalid API: ' + req.method + req.url, 501);
+        res.send('Invalid API: ' + req.method + ' ' + req.url, 501);
     },
     SendJson: function(res, content)
     {
