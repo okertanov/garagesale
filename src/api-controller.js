@@ -16,7 +16,7 @@
 "use strict";
 
 var underscore = require('underscore')._,
-    Db = require('api-db.js ').ApiDb;
+    Db = require('./api-db.js').ApiDb;
 
 function IsEmptyObject(o)
 {
