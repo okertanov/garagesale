@@ -114,6 +114,12 @@ exports.ApiController =
 
         this.SendJson(res, response);
     },
+    Default: function(req, res, next)
+    {
+        console.log('ApiController.Default');
+
+        res.send('Invalid API', 501);
+    },
     SendJson: function(res, content)
     {
         res.contentType('application/json').json(content);
@@ -136,7 +142,9 @@ exports.ApiController =
         app.post(   '/api/item/:cat/:id',    function(req, res, next){ that.ItemEdit.call(that, req, res, next); }                  );
         app.delete( '/api/item/:cat/:id',    function(req, res, next){ that.ItemDelete.call(that, req, res, next); }                );
         // -- admin interface (with the same options)
-        app.get(    '/api/admin/:obj:/*',    function(req, res, next){ that.Admin.call(that, req, res, next); }                     );
+        app.get(    '/api/admin/:obj/*',    function(req, res, next){ that.Admin.call(that, req, res, next); }                     );
+        // -- Other
+        app.get(    '/*',                   function(req, res, next){ that.Default.call(that, req, res, next); }                     );
 
         return this;
     }
