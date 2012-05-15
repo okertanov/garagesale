@@ -28,10 +28,14 @@ exports.ApiController =
 {
     Initialize: function()
     {
+        console.log('ApiController.Initialize');
+
         Db.Connect(DbName);
     },
     Terminate: function()
     {
+        console.log('ApiController.Terminate');
+
         Db.Disconnect();
     },
     CategoriesGet: function(req, res, next)
@@ -118,7 +122,7 @@ exports.ApiController =
     {
         console.log('ApiController.Default', req.method, req.url);
 
-        res.send('Invalid API: ' + req.method + ' / ' + req.url, 501);
+        res.send('Invalid API: ' + req.method + req.url, 501);
     },
     SendJson: function(res, content)
     {
@@ -127,6 +131,8 @@ exports.ApiController =
     },
     Route: function(app)
     {
+        console.log('ApiController.Route');
+
         var that = this;
 
         // -- all categories in the garage (list)
