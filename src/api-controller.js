@@ -116,9 +116,9 @@ exports.ApiController =
     },
     Default: function(req, res, next)
     {
-        console.log('ApiController.Default', req.method, req.query);
+        console.log('ApiController.Default', req.method, req.url);
 
-        res.send('Invalid API: ' + req.method + ' / ' + req.query, 501);
+        res.send('Invalid API: ' + req.method + ' / ' + req.url, 501);
     },
     SendJson: function(res, content)
     {
