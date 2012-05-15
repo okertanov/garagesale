@@ -30,22 +30,17 @@ Architecture
     /lib
     /img
     /static
-
-### Note app
-    /app/garage/:cat
-    /app/item/:id
-    /app/user/:id
-    /app/admin
+    /admin
 
 ### API
-    /api/v1/garage/:cat
-    /api/v1/item/:id
-    /api/v1/user/:id
-    /api/v1/admin/:action/:id
+    /api/garage                 -- all categories in the garage (list)
+    /api/garage/:cat            -- single category (just info on the category)
+    /api/garage/:cat/filter/:f  -- items in category by filter (including all)
+    /api/garage/:cat/:id        -- single item in category
+    /api/admin                  -- admin interface (with the same options)
 
 Server
 ------
-
 ### Node.js & NPM
     sudo apt-get install python-software-properties
     sudo apt-add-repository ppa:chris-lea/node.js
@@ -67,6 +62,7 @@ Server
     apt-get update && apt-get install nginx
 #### mongodb
     sudo aptitude install mongodb
+
 #### varnish
 
 Deploy
