@@ -42,6 +42,7 @@ app.configure(function () {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
+ApiController.Initialize();
 ApiController.Route(app);
 
 // Server
