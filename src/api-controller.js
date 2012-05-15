@@ -117,7 +117,7 @@ exports.ApiController =
     {
         res.contentType('application/json').json(content);
         return this;
-    }
+    },
     Route: function(app)
     {
         var that = this;
