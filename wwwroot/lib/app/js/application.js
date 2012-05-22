@@ -168,7 +168,12 @@ exports.Application = function(options)
             {
                 var appModel = new exports.ApplicationModel();
 
-                var subviews = [];
+                var subviews =
+                    [
+                        new exports.HeaderView(  {  model: new exports.HeaderModel() } ),
+                        new exports.ContentView( { model: new exports.ContentModel() } ),
+                        new exports.FooterView(  {  model: new exports.FooterModel() } )
+                    ];
                 var appView = new exports.ApplicationView({model: appModel, subviews: subviews});
 
                 appModel.fetch(); // render() is called when changed;
