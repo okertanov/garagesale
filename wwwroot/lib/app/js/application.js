@@ -142,28 +142,33 @@ exports.Utilities = function()
 */
 exports.Util = new exports.Utilities();
 
+/* APP */
+
 /**
     @class exports.Application
     @brief Application class - Web application
 */
-exports.Application = function()
+exports.Application = function(options)
 {
     var defaults =
     {
+        name: 'Garage',
         lang: 'en', /* en, de, fr, lv, etc. */
     };
 
+    var ctx = $.extend({ }, defaults, options);
+
     return {
-        ctx:
-        {
-            lang: null
-        },
+        ctx: ctx,
         Initialize: function()
         {
-            exports.ToLog('Garage:', 'Starting Application.');
+            exports.ToLog(this.ctx.name, 'Starting Application.');
 
             try
             {
+                var subviews = [];
+                var appView = new ApplicationView({subviews: subviews});
+                appView.render();
             }
             catch(e)
             {
@@ -176,6 +181,7 @@ exports.Application = function()
         {
             try
             {
+                exports.ToLog(this.ctx.name, 'Stopping Application.');
             }
             catch(e)
             {
@@ -184,6 +190,35 @@ exports.Application = function()
         }
     };
 };
+
+/* UI */
+
+exports.ApplicationView = Backbone.View.extend({
+    el: 'body',
+    tmpl: 'app-view-template',
+    initialize: function()
+    {
+        exports.ToLog('ApplicationView', 'initialize');
+
+        this.model.bind('change', this.render, this);
+        this.model.view = this;
+
+        return this.render();
+    },
+    render: function()
+    {
+        exports.ToLog('ApplicationView', 'render');
+
+        var template = _.template($(this.tmpl).html());
+        $(this.el).html(template(this.model.toJSON()));
+
+        this.subviews.map(function(view){
+            view.render();
+        });
+
+        return this;
+    }
+});
 
 })(jQuery, _, Backbone, (typeof exports !== 'undefined' ? exports : this['Garage'] = {}));
 

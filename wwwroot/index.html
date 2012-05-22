@@ -27,13 +27,26 @@
 
     <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap-responsive.css">
-
     <link rel="stylesheet" type="text/css" href="/lib/app/css/style.css" media="screen" />
 
+    <script type="text/javascript" src="/lib/modernizr/modernizr-2.5.3-respond-1.1.0.min.js"></script>
     <script type="text/javascript" src="/lib/jquery/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="/lib/json/json2.js"></script>
     <script type="text/javascript" src="/lib/underscore/underscore.min.js"></script>
     <script type="text/javascript" src="/lib/backbone/backbone.min.js"></script>
+
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-transition.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-alert.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-modal.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-tab.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-popover.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-button.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-collapse.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-carousel.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-typeahead.js"></script>
 
     <script type="text/javascript" src="/lib/app/js/application.js"></script>
 
@@ -48,11 +61,34 @@
 
 <body>
 
-    <!-- Root container -->
-    <div id="ui-root-el">
-    </div>
+    <!--[if lt IE 7]>
+        <p class=chromeframe>Your browser is <em>ancient!</em>
+        <a href="http://browsehappy.com/">Upgrade to a different browser</a> or
+        <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p>
+    <![endif]-->
 
     <!-- Templates -->
+
+    <script type="text/template" id="app-view-template">
+        <!-- Header section -->
+        <section>
+            <header>
+            </header>
+        </section>
+
+        <!-- Content section -->
+        <section>
+            <article>
+            </article>
+        </section>
+
+        <!-- Footer section -->
+        <section>
+            <footer>
+            </footer>
+        </section>
+    </script>
+
     <script type="text/template" id="template-template-template">
     </script>
 
