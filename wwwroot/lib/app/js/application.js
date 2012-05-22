@@ -273,7 +273,7 @@ exports.FooterModel = Backbone.Model.extend(
 
 exports.ApplicationView = Backbone.View.extend(
 {
-    el: 'body > section > #ui-root-el',
+    el: '#ui-root-el',
     tmpl: '#app-view-template',
     initialize: function()
     {
@@ -301,7 +301,7 @@ exports.ApplicationView = Backbone.View.extend(
 
 exports.ContentView = Backbone.View.extend(
 {
-    el: '#ui-root-el section > article',
+    el: '#ui-content-el',
     tmpl: '#content-view-template',
     initialize: function()
     {
@@ -325,7 +325,7 @@ exports.ContentView = Backbone.View.extend(
 
 exports.HeaderView = Backbone.View.extend(
 {
-    el: '#ui-root-el section > header',
+    el: '#ui-header-el',
     tmpl: '#header-view-template',
     initialize: function()
     {
@@ -349,7 +349,7 @@ exports.HeaderView = Backbone.View.extend(
 
 exports.FooterView = Backbone.View.extend(
 {
-    el: '#ui-root-el section > footer',
+    el: '#ui-footer-el',
     tmpl: '#footer-view-template',
     initialize: function()
     {
