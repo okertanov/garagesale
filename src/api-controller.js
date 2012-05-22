@@ -39,7 +39,7 @@ exports.ApiController =
 
         ApiDb.Disconnect();
     },
-    ApplicationGet: : function(req, res, next)
+    ApplicationGet: function(req, res, next)
     {
         console.log('ApiController.ApplicationGet');
 
