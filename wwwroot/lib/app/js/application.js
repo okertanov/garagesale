@@ -282,7 +282,7 @@ exports.ApplicationView = Backbone.View.extend(
         this.model.view = this;
         this.model.bind('change', this.render, this);
 
-        return this.render();
+        return this;
     },
     render: function()
     {
@@ -310,7 +310,7 @@ exports.ContentView = Backbone.View.extend(
         this.model.view = this;
         this.model.bind('change', this.render, this);
 
-        return this.render();
+        return this;
     },
     render: function()
     {
@@ -334,7 +334,7 @@ exports.HeaderView = Backbone.View.extend(
         this.model.view = this;
         this.model.bind('change', this.render, this);
 
-        return this.render();
+        return this;
     },
     render: function()
     {
@@ -358,7 +358,7 @@ exports.FooterView = Backbone.View.extend(
         this.model.view = this;
         this.model.bind('change', this.render, this);
 
-        return this.render();
+        return this;
     },
     render: function()
     {
