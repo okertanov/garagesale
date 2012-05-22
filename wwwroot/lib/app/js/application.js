@@ -166,9 +166,12 @@ exports.Application = function(options)
 
             try
             {
+                var appModel = new exports.ApplicationModel();
+
                 var subviews = [];
-                var appView = new ApplicationView({subviews: subviews});
-                appView.render();
+                var appView = new exports.ApplicationView({subviews: subviews});
+
+                appModel.fetch(); // render() is called when changed;
             }
             catch(e)
             {
@@ -191,7 +194,35 @@ exports.Application = function(options)
     };
 };
 
-/* UI */
+/* Models */
+
+var ApplicationModel = Backbone.Model.extend(
+{
+    defaults:
+    {
+    },
+    url: function()
+    {
+        return '/api/application';
+    },
+    initialize: function()
+    {
+        this.bind('change', function(model, value)
+        {
+            exports.ToLog('Model changed: ' + model + ' to: ' + value);
+        });
+        this.bind('error', function(model, error)
+        {
+            exports.ToLog('Model error: ' + model + ' error: ' + error);
+        });
+        exports.ToLog('Model created: ' + this);
+    },
+    validate: function(attributes)
+    {
+    }
+});
+
+/* Views */
 
 exports.ApplicationView = Backbone.View.extend({
     el: 'body',

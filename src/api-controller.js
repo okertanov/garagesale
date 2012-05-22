@@ -39,10 +39,18 @@ exports.ApiController =
 
         ApiDb.Disconnect();
     },
+    ApplicationGet: : function(req, res, next)
+    {
+        console.log('ApiController.ApplicationGet');
+
+        var response = JSON.stringify({});
+
+        this.SendJson(res, response);
+    },
     CategoriesGet: function(req, res, next)
     {
         console.log('ApiController.Categories');
-        
+
         var that = this;
         ApiDb.Category.find({}, function(err, data){
             if ( !err )
@@ -54,7 +62,7 @@ exports.ApiController =
     CategoriesCreateCategory: function(req, res, next)
     {
         console.log('ApiController.Category');
-        
+
         var that  = this,
             name  = req.params.name,
             descr = req.params.description,
@@ -151,6 +159,9 @@ exports.ApiController =
         console.log('ApiController.Route');
 
         var that = this;
+
+        // -- application
+        app.get(    '/api/application',     function(req, res, next){ that.ApplicationGet.call(that, req, res, next); }            );
 
         // -- all categories in the garage (list)
         app.get(    '/api/categories',      function(req, res, next){ that.CategoriesGet.call(that, req, res, next); }             );
