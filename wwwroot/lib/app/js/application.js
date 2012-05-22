@@ -207,15 +207,57 @@ exports.ApplicationModel = Backbone.Model.extend(
     },
     initialize: function()
     {
-        this.bind('change', function(model, value)
-        {
-            exports.ToLog('Model changed: ' + model + ' to: ' + value);
-        });
-        this.bind('error', function(model, error)
-        {
-            exports.ToLog('Model error: ' + model + ' error: ' + error);
-        });
-        exports.ToLog('Model created: ' + this);
+    },
+    validate: function(attributes)
+    {
+    }
+});
+
+exports.ContentModel = Backbone.Model.extend(
+{
+    defaults:
+    {
+    },
+    url: function()
+    {
+        return null;
+    },
+    initialize: function()
+    {
+    },
+    validate: function(attributes)
+    {
+    }
+});
+
+exports.HeaderModel = Backbone.Model.extend(
+{
+    defaults:
+    {
+    },
+    url: function()
+    {
+        return null;
+    },
+    initialize: function()
+    {
+    },
+    validate: function(attributes)
+    {
+    }
+});
+
+exports.FooterModel = Backbone.Model.extend(
+{
+    defaults:
+    {
+    },
+    url: function()
+    {
+        return null;
+    },
+    initialize: function()
+    {
     },
     validate: function(attributes)
     {
@@ -224,15 +266,16 @@ exports.ApplicationModel = Backbone.Model.extend(
 
 /* Views */
 
-exports.ApplicationView = Backbone.View.extend({
-    el: '#ui-root-el',
+exports.ApplicationView = Backbone.View.extend(
+{
+    el: 'body > section > #ui-root-el',
     tmpl: '#app-view-template',
     initialize: function()
     {
         exports.ToLog('ApplicationView', 'initialize');
 
-        this.model.bind('change', this.render, this);
         this.model.view = this;
+        this.model.bind('change', this.render, this);
 
         return this.render();
     },
@@ -246,6 +289,78 @@ exports.ApplicationView = Backbone.View.extend({
         this.options.subviews.map(function(view){
             view.render();
         });
+
+        return this;
+    }
+});
+
+exports.ContentView = Backbone.View.extend(
+{
+    el: 'body > section > article',
+    tmpl: '#content-view-template',
+    initialize: function()
+    {
+        exports.ToLog('ContentView', 'initialize');
+
+        this.model.view = this;
+        this.model.bind('change', this.render, this);
+
+        return this.render();
+    },
+    render: function()
+    {
+        exports.ToLog('ContentView', 'render');
+
+        var template = _.template($(this.tmpl).html());
+        $(this.el).html(template(this.model.toJSON()));
+
+        return this;
+    }
+});
+
+exports.HeaderView = Backbone.View.extend(
+{
+    el: 'body > section > header',
+    tmpl: '#header-view-template',
+    initialize: function()
+    {
+        exports.ToLog('HeaderView', 'initialize');
+
+        this.model.view = this;
+        this.model.bind('change', this.render, this);
+
+        return this.render();
+    },
+    render: function()
+    {
+        exports.ToLog('HeaderView', 'render');
+
+        var template = _.template($(this.tmpl).html());
+        $(this.el).html(template(this.model.toJSON()));
+
+        return this;
+    }
+});
+
+exports.FooterView = Backbone.View.extend(
+{
+    el: 'body > section > footer',
+    tmpl: '#footer-view-template',
+    initialize: function()
+    {
+        exports.ToLog('FooterView', 'initialize');
+
+        this.model.view = this;
+        this.model.bind('change', this.render, this);
+
+        return this.render();
+    },
+    render: function()
+    {
+        exports.ToLog('FooterView', 'render');
+
+        var template = _.template($(this.tmpl).html());
+        $(this.el).html(template(this.model.toJSON()));
 
         return this;
     }
