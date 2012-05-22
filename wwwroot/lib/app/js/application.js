@@ -168,13 +168,7 @@ exports.Application = function(options)
             {
                 var appModel = new exports.ApplicationModel();
 
-                var subviews =
-                    [
-                        new exports.HeaderView(  {  model: new exports.HeaderModel() } ),
-                        new exports.ContentView( { model: new exports.ContentModel() } ),
-                        new exports.FooterView(  {  model: new exports.FooterModel() } )
-                    ];
-                var appView = new exports.ApplicationView({model: appModel, subviews: subviews});
+                var appView = new exports.ApplicationView({model: appModel});
 
                 appModel.fetch(); // render() is called when changed;
             }
@@ -291,7 +285,14 @@ exports.ApplicationView = Backbone.View.extend(
         var template = _.template($(this.tmpl).html());
         $(this.el).html(template(this.model.toJSON()));
 
-        this.options.subviews.map(function(view){
+        this.subviews =
+            [
+                new exports.HeaderView(  { model: new exports.HeaderModel()  } ),
+                new exports.ContentView( { model: new exports.ContentModel() } ),
+                new exports.FooterView(  { model: new exports.FooterModel()  } )
+            ];
+
+        this.subviews.map(function(view){
             view.render();
         });
 
