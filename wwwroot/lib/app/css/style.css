@@ -2,3 +2,16 @@
     @copyright  Copyright (C) 2012 Oleg Kertanov <okertanov@gmail.com>
 */
 
+body
+{
+    height: 100%;
+}
+
+.row-fluid.first
+{
+}
+
+.row-fluid.second
+{
+    min-height: 50%;
+}
