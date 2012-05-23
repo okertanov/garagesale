@@ -2,7 +2,7 @@
     @copyright  Copyright (C) 2012 Oleg Kertanov <okertanov@gmail.com>
 */
 
-body
+html, body
 {
     height: 100%;
 }
