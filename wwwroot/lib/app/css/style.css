@@ -40,5 +40,8 @@ form.navbar-form .btn
 footer
 {
     position: absolute;
+    margin: 0 0 32 0;
+    width: 100%;
     bottom: 0;
+    right: 0;
 }
