@@ -37,11 +37,14 @@ form.navbar-form .btn
     min-height: 200px;
 }
 
-footer div
+@media (max-width: 800px)
 {
-    position: absolute;
-    margin: 0 0 32 0;
-    width: 100%;
-    bottom: 0;
-    right: 0;
+    footer div
+    {
+        position: absolute;
+        margin: 0 0 32 0;
+        width: 100%;
+        bottom: 0;
+        right: 0;
+    }
 }
