@@ -28,9 +28,13 @@ form.navbar-form .btn
 {
 }
 
-.hero-unit
+.mero-unit
 {
+    padding: 60px;
+    margin-bottom: 30px;
+    background-color: #eeeeee;
     line-height: 200%;
+    min-height: 400px;
 }
 
 footer div.breadcrumb
