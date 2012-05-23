@@ -39,4 +39,6 @@ form.navbar-form .btn
 
 footer
 {
+    position: absolute;
+    bottom: 0;
 }
