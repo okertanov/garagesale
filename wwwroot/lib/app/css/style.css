@@ -7,11 +7,33 @@ html, body
     height: 100%;
 }
 
+form.navbar-form
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+form.navbar-form .btn
+{
+    min-width: 180px;
+}
+
 .row-fluid.first
 {
 }
 
 .row-fluid.second
 {
-    min-height: 50%;
+}
+
+.hero-unit
+{
+    line-height: 200%;
+}
+
+footer div.breadcrumb
+{
+    text-align:right;
 }
