@@ -95,8 +95,8 @@ exports.ApiController =
 
         var that  = this,
             cat   = req.params.cat,
-            name  = req.params.name,
-            descr = req.params.description,
+            name  = req.body.name,
+            descr = req.body.description,
             dirty = false;
 
         ApiDb.Category.findOne({_id: cat}, function(err, data){
