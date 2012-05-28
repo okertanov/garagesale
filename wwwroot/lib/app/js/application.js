@@ -275,6 +275,34 @@ exports.FooterModel = Backbone.Model.extend(
     }
 });
 
+exports.CategoryModel = Backbone.Model.extend(
+{
+    defaults:
+    {
+    },
+    initialize: function()
+    {
+    },
+    validate: function(attributes)
+    {
+    }
+});
+
+exports.CategoriesCollection = Backbone.Collection.extend(
+{
+    model: exports.CategoryModel,
+    url: function()
+    {
+        return '/api/categories';
+    },
+    initialize: function()
+    {
+    },
+    validate: function(attributes)
+    {
+    }
+});
+
 /* Views */
 
 exports.ApplicationView = Backbone.View.extend(
@@ -369,6 +397,54 @@ exports.FooterView = Backbone.View.extend(
 
         var template = _.template($(this.tmpl).html());
         $(this.el).html(template(this.model.toJSON()));
+
+        return this;
+    }
+});
+
+exports.CategoryView = Backbone.View.extend(
+{
+    tagName: 'li',
+    classNmae: 'ui-category-bage',
+    initialize: function()
+    {
+        exports.ToLog('CategoryView', 'initialize');
+
+        this.model.view = this;
+        this.model.bind('change', this.render, this);
+
+        return this;
+    },
+    render: function()
+    {
+        exports.ToLog('CategoryView', 'render');
+
+        return this;
+    }
+});
+
+exports.CategoriesView = Backbone.View.extend(
+{
+    tagName: 'ul',
+    classNmae: 'ui-categories-view',
+    initialize: function()
+    {
+        exports.ToLog('CategoriesView', 'initialize');
+
+        this.collection.view = this;
+        this.collection.bind('change', this.render, this);
+
+        return this;
+    },
+    render: function()
+    {
+        exports.ToLog('CategoriesView', 'render');
+
+        this.$el.empty();
+        this.collection.each(function(item){
+            var view = new exports.CategoryView({model: item});
+            view.render().$el.appendTo(this.$el);
+        });
 
         return this;
     }
