@@ -414,7 +414,7 @@ exports.FooterView = Backbone.View.extend(
 exports.CategoryView = Backbone.View.extend(
 {
     tagName: 'li',
-    classNmae: 'ui-category-bage',
+    className: 'ui-category-bage',
     initialize: function()
     {
         exports.ToLog('CategoryView', 'initialize');
@@ -428,6 +428,8 @@ exports.CategoryView = Backbone.View.extend(
     {
         exports.ToLog('CategoryView', 'render');
 
+        this.$el.text(this.model.name);
+
         return this;
     }
 });
@@ -435,7 +437,7 @@ exports.CategoryView = Backbone.View.extend(
 exports.CategoriesView = Backbone.View.extend(
 {
     tagName: 'ul',
-    classNmae: 'ui-categories-view',
+    className: 'ui-categories-view',
     initialize: function()
     {
         exports.ToLog('CategoriesView', 'initialize');
@@ -455,7 +457,7 @@ exports.CategoriesView = Backbone.View.extend(
         var that = this;
         this.collection.each(function(item){
             var view = new exports.CategoryView({model: item});
-            $(that.tagName).appendTo(that.$el).append( view.render().$el );
+            $('<' + that.tagName + '>').appendTo(that.$el).append( view.render().$el );
         });
 
         return this;
