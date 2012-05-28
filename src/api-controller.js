@@ -109,6 +109,9 @@ exports.ApiController =
     {
         console.log('ApiController.CategoryDelete');
 
+        var that = this,
+            cat  = req.params.cat;
+
         ApiDb.Category.findOne({_id: cat}, function(err, data){
             if ( !err )
                 data.remove(), that.SendJson(res, data);
