@@ -291,10 +291,11 @@ exports.CategoryModel = Backbone.Model.extend(
     },
     url: function()
     {
-        return '/api/category/' + this.get('_id');
+        return '/api/category/' + this.id;
     },
     initialize: function()
     {
+        this.id = this.get('_id');
     },
     validate: function(attributes)
     {
@@ -434,7 +435,7 @@ exports.CategoryView = Backbone.View.extend(
 
         $('<a href="#">').appendTo( this.$el )
             .text( this.model.get('name') )
-            .attr('href', this.model.url());
+            .attr('href', this.model.id);
 
         return this;
     }
