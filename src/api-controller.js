@@ -102,8 +102,8 @@ exports.ApiController =
         ApiDb.Category.findOne({_id: cat}, function(err, data){
             if ( !err )
             {
-                name && name.length && data.name = name, dirty = true;
-                descr && descr.length && data.description = descr, dirty = true;
+                name && name.length && (data.name = name, dirty = true);
+                descr && descr.length && (data.description = descr, dirty = true);
 
                 if ( dirty === true )
                 {
