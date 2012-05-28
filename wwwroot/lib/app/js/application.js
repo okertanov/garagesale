@@ -455,8 +455,7 @@ exports.CategoriesView = Backbone.View.extend(
         var that = this;
         this.collection.each(function(item){
             var view = new exports.CategoryView({model: item});
-            var viewEl = view.render().$el;
-            that.$el.append(viewEl);
+            $(that.tagName).appendTo(that.$el).append( view.render().$el );
         });
 
         return this;
