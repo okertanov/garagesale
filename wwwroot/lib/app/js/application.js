@@ -459,10 +459,11 @@ exports.CategoriesView = Backbone.View.extend(
         exports.ToLog('CategoriesView', 'render');
 
         var that = this,
-            template = _.template($(this.tmpl).html()),
-            ul = $(this.el).children('ul');
+            template = _.template($(this.tmpl).html());
 
         $(this.el).html(template());
+
+        var ul = $(this.el).children('ul');
 
         this.collection.each(function(item){
             var view = new exports.CategoryView({model: item});
