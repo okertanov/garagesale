@@ -460,6 +460,7 @@ exports.CategoriesView = Backbone.View.extend(
             [
                 '<',
                     that.tagName,
+                        ' ',
                         'class="',
                         that.className,
                         ' ',
