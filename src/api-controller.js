@@ -178,10 +178,10 @@ exports.ApiController =
         ApiDb.Category.findOne({_id: cat}, function(err, data){
             if ( !err )
             {
-                item   = new ApiDb.Item({name: name,
-                                        description: descr,
-                                        category: data._id,
-                                        images: []});
+                var item = new ApiDb.Item({name: name,
+                                           description: descr,
+                                           category: data._id,
+                                           images: []});
                 item.save(function(err){
                     if ( !err )
                         that.SendJson(res, item);
@@ -190,7 +190,7 @@ exports.ApiController =
                 });
             }
             else
-                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url + '\nError: ' + err, 400);
         });
     },
     ItemsEditItem: function(req, res, next)
