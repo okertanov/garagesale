@@ -52,7 +52,7 @@ exports.ApiController =
         console.log('ApiController.CategoriesGet');
 
         var that = this;
-        ApiDb.Category.find({}, function(err, data){
+        ApiDb.Category.find({}).asc('name').run(function(err, data){
             if ( !err )
                 that.SendJson(res, data);
             else
