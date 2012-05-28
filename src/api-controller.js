@@ -105,7 +105,7 @@ exports.ApiController =
                 name && name.length && data.name = name, dirty = true;
                 descr && descr.length && data.description = descr, dirty = true;
 
-                if ( dirty = true )
+                if ( dirty === true )
                 {
                     data.update(function(err, data){
                         if ( !err )
