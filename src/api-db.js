@@ -40,7 +40,7 @@ exports.ItemSchema = new Schema({
     description:    { type: String,     required: false },
     images:         { type: [String],   required: false },
     user:           { type: ObjectId,   required: true  },
-    categories:     { type: [ObjectId], required: true  },
+    category:       { type: ObjectId,   required: true  },
 });
 
 exports.ApiDb =
