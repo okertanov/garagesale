@@ -38,6 +38,7 @@ exports.CategorySchema = new Schema({
 exports.ItemSchema = new Schema({
     name:           { type: String,     required: true  },
     description:    { type: String,     required: false },
+    date:           { type: Date,       required: true, default: Date.now },
     images:         { type: [String],   required: false },
     user:           { type: ObjectId,   required: true  },
     category:       { type: ObjectId,   required: true  },

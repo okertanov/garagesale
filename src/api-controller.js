@@ -64,8 +64,8 @@ exports.ApiController =
         console.log('ApiController.CategoriesCreateCategory');
 
         var that  = this,
-            name  = req.params.name,
-            descr = req.params.description,
+            name  = req.params.name        || req.body.name,
+            descr = req.params.description || req.body.description,
             cat   = new ApiDb.Category({name: name, description: descr, type: 'user'});
 
         cat.save(function(err){
@@ -138,23 +138,42 @@ exports.ApiController =
                 that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
         });
     },
-    ItemsGet: function(req, res, next)
+    ItemsGetItems: function(req, res, next)
+    {
+        var that = this,
+            cat  = req.params.cat;
+
+        ApiDb.Item.find({category: cat}).desc('date').run(function(err, data){
+            if ( !err )
+                that.SendJson(res, data);
+            else
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+        });
+    }
+    ItemsGetItem: function(req, res, next)
     {
         console.log('ApiController.ItemsGet');
 
-        var response = JSON.stringify({});
+        var that = this,
+            cat  = req.params.cat,
+            item = req.params.id;
 
-        this.SendJson(res, response);
+        ApiDb.Category.findOne({_id: item, category: cat}, function(err, data){
+            if ( !err )
+                that.SendJson(res, data);
+            else
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+        });
     },
     ItemsCreateItem: function(req, res, next)
     {
         console.log('ApiController.ItemsCreateItem');
 
         var that   = this,
-            name   = req.params.name,
-            descr  = req.params.description,
-            userid = req.params.user,
-            catid  = req.params.category,
+            name   = req.params.name        || req.body.name,
+            descr  = req.params.description || req.body.description,
+            userid = req.params.user        || req.body.user,
+            catid  = req.params.category    || req.body.category,
             item   = new ApiDb.Item({name: name, description: descr, user: userid, category: catid, images: []});
 
         item.save(function(err){
@@ -164,21 +183,24 @@ exports.ApiController =
                 that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
         });
     },
-    ItemsEdit: function(req, res, next)
+    ItemsEditItem: function(req, res, next)
     {
         console.log('ApiController.ItemsEdit');
-
-        var response = JSON.stringify({});
-
-        this.SendJson(res, response);
     },
-    ItemsDelete: function(req, res, next)
+    ItemsDeleteItem: function(req, res, next)
     {
         console.log('ApiController.ItemsDelete');
 
-        var response = JSON.stringify({});
+        var that = this,
+            cat  = req.params.cat,
+            item = req.params.id;
 
-        this.SendJson(res, response);
+        ApiDb.Category.findOne({_id: item, category: cat}, function(err, data){
+            if ( !err )
+                data.remove(), that.SendJson(res, data);
+            else
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+        });
     },
     Admin: function(req, res, next)
     {
@@ -225,10 +247,11 @@ exports.ApiController =
         app.delete( '/api/category/:cat',   function(req, res, next){ that.CategoryDelete.call(that, req, res, next); }            );
 
         // -- single item in category or filter (including 'all', and fuzzy queries)
-        app.get(    '/api/items/:cat/:id',  function(req, res, next){ that.ItemsGet.call(that, req, res, next); }                  );
+        app.get(    '/api/items/:cat',      function(req, res, next){ that.ItemsGetItems.call(that, req, res, next); }             );
+        app.get(    '/api/items/:cat/:id',  function(req, res, next){ that.ItemsGetItem.call(that, req, res, next); }              );
         app.put(    '/api/items/:cat',      function(req, res, next){ that.ItemsCreateItem.call(that, req, res, next); }           );
-        app.post(   '/api/items/:cat/:id',  function(req, res, next){ that.ItemsEdit.call(that, req, res, next); }                 );
-        app.delete( '/api/items/:cat/:id',  function(req, res, next){ that.ItemsDelete.call(that, req, res, next); }               );
+        app.post(   '/api/items/:cat/:id',  function(req, res, next){ that.ItemsEditItem.call(that, req, res, next); }             );
+        app.delete( '/api/items/:cat/:id',  function(req, res, next){ that.ItemsDeleteItem.call(that, req, res, next); }           );
 
         // -- admin interface (with the same options)
         app.get(    '/api/admin/:obj/*',    function(req, res, next){ that.Admin.call(that, req, res, next); }                     );
