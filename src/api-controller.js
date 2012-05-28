@@ -180,7 +180,6 @@ exports.ApiController =
             {
                 item   = new ApiDb.Item({name: name,
                                         description: descr,
-                                        user: user,
                                         category: data._id,
                                         images: []});
                 item.save(function(err){
