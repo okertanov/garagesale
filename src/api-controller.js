@@ -178,8 +178,7 @@ exports.ApiController =
         ApiDb.Category.findOne({_id: cat}, function(err, data){
             if ( !err )
             {
-                console.dir(data);
-
+                console.dir(cat)
                 var item = new ApiDb.Item({name: name,
                                            description: descr,
                                            category: data._id,
