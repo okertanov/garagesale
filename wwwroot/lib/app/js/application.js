@@ -181,8 +181,8 @@ exports.Application = function(options)
                         exports.ToLog(response);
                     },
                     success: function(model, response){
-                        var categories = new CategoriesCollection();
-                        var categoriesView = new CategoriesView( {collection: categories} );
+                        var categories = new exports.CategoriesCollection();
+                        var categoriesView = new exports.CategoriesView( {collection: categories} );
                         categories.fetch();
                     }
                 }); // ApplicationView.render() is called when model is changed;
