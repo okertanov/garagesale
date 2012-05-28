@@ -428,7 +428,9 @@ exports.CategoryView = Backbone.View.extend(
     {
         exports.ToLog('CategoryView', 'render');
 
-        $('<a href="#">').appendTo( this.$el ).text( this.model.get('name') );
+        $('<a href="#">').appendTo( this.$el )
+            .text( this.model.get('name') )
+            .attr('href', this.model.url());
 
         return this;
     }
