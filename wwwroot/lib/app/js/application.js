@@ -435,7 +435,7 @@ exports.CategoryView = Backbone.View.extend(
 
         $('<a href="#">').appendTo( this.$el )
             .text( this.model.get('name') )
-            .attr('href', this.model.id);
+            .attr('href', '#category/' + this.model.id);
 
         return this;
     }
@@ -443,9 +443,7 @@ exports.CategoryView = Backbone.View.extend(
 
 exports.CategoriesView = Backbone.View.extend(
 {
-    tagName: 'ul',
-    className:  'ui-categories-view',
-    className2: 'plate',
+    tmpl: '#categories-view-template',
     initialize: function()
     {
         exports.ToLog('CategoriesView', 'initialize');
@@ -460,22 +458,11 @@ exports.CategoriesView = Backbone.View.extend(
     {
         exports.ToLog('CategoriesView', 'render');
 
-        this.$el.empty();
+        var that = this;
+            template = _.template($(this.tmpl).html());
+            ul = $(this.el).children('ul');
 
-        var that = this,
-            cont =
-            [
-                '<',
-                    that.tagName,
-                        ' ',
-                        'class="',
-                        that.className,
-                        ' ',
-                        that.className2,
-                        '"',
-                '>'
-            ],
-            ul = $( cont.join('') ).appendTo(that.$el);
+        $(this.el).html(template());
 
         this.collection.each(function(item){
             var view = new exports.CategoryView({model: item});
