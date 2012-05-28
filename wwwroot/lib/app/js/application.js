@@ -289,6 +289,10 @@ exports.CategoryModel = Backbone.Model.extend(
     defaults:
     {
     },
+    url: function()
+    {
+        return '/api/category/' + this.get('_id');
+    },
     initialize: function()
     {
     },

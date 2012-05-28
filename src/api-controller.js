@@ -49,7 +49,7 @@ exports.ApiController =
     },
     CategoriesGet: function(req, res, next)
     {
-        console.log('ApiController.Categories');
+        console.log('ApiController.CategoriesGet');
 
         var that = this;
         ApiDb.Category.find({}, function(err, data){
@@ -61,7 +61,7 @@ exports.ApiController =
     },
     CategoriesCreateCategory: function(req, res, next)
     {
-        console.log('ApiController.Category');
+        console.log('ApiController.CategoriesCreateCategory');
 
         var that  = this,
             name  = req.params.name,
@@ -77,15 +77,21 @@ exports.ApiController =
     },
     CategoryGet: function(req, res, next)
     {
-        console.log('ApiController.Item');
+        console.log('ApiController.CategoryGet');
 
-        var response = JSON.stringify({});
+        var that = this,
+            cat  = req.params.cat;
 
-        this.SendJson(res, response);
+        ApiDb.Category.findOne({_id: cat}, function(err, data){
+            if ( !err )
+                that.SendJson(res, data);
+            else
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+        });
     },
     CategoryCreateItem: function(req, res, next)
     {
-        console.log('ApiController.Item');
+        console.log('ApiController.CategoryCreateItem');
 
         var response = JSON.stringify({});
 
@@ -93,7 +99,7 @@ exports.ApiController =
     },
     CategoryEdit: function(req, res, next)
     {
-        console.log('ApiController.Item');
+        console.log('ApiController.CategoryEdit');
 
         var response = JSON.stringify({});
 
@@ -101,31 +107,31 @@ exports.ApiController =
     },
     CategoryDelete: function(req, res, next)
     {
-        console.log('ApiController.Item');
+        console.log('ApiController.CategoryDelete');
 
         var response = JSON.stringify({});
 
         this.SendJson(res, response);
     },
-    ItemGet: function(req, res, next)
+    ItemsGet: function(req, res, next)
     {
-        console.log('ApiController.Item');
+        console.log('ApiController.ItemsGet');
 
         var response = JSON.stringify({});
 
         this.SendJson(res, response);
     },
-    ItemEdit: function(req, res, next)
+    ItemsEdit: function(req, res, next)
     {
-        console.log('ApiController.Item');
+        console.log('ApiController.ItemsEdit');
 
         var response = JSON.stringify({});
 
         this.SendJson(res, response);
     },
-    ItemDelete: function(req, res, next)
+    ItemsDelete: function(req, res, next)
     {
-        console.log('ApiController.Item');
+        console.log('ApiController.ItemsDelete');
 
         var response = JSON.stringify({});
 
@@ -174,9 +180,9 @@ exports.ApiController =
         app.post(   '/api/category/:cat',   function(req, res, next){ that.CategoryEdit.call(that, req, res, next); }              );
         app.delete( '/api/category/:cat',   function(req, res, next){ that.CategoryDelete.call(that, req, res, next); }            );
         // -- single item in category or filter (including 'all', and fuzzy queries)
-        app.get(    '/api/item/:cat/:id',   function(req, res, next){ that.ItemGet.call(that, req, res, next); }                   );
-        app.post(   '/api/item/:cat/:id',   function(req, res, next){ that.ItemEdit.call(that, req, res, next); }                  );
-        app.delete( '/api/item/:cat/:id',   function(req, res, next){ that.ItemDelete.call(that, req, res, next); }                );
+        app.get(    '/api/items/:cat/:id',   function(req, res, next){ that.ItemsGet.call(that, req, res, next); }                   );
+        app.post(   '/api/items/:cat/:id',   function(req, res, next){ that.ItemsEdit.call(that, req, res, next); }                  );
+        app.delete( '/api/items/:cat/:id',   function(req, res, next){ that.ItemsDelete.call(that, req, res, next); }                );
         // -- admin interface (with the same options)
         app.get(    '/api/admin/:obj/*',    function(req, res, next){ that.Admin.call(that, req, res, next); }                     );
         // -- Other
