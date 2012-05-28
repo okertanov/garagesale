@@ -426,9 +426,9 @@ exports.CategoryView = Backbone.View.extend(
     },
     render: function()
     {
-        exports.ToLog('CategoryView', 'render', this.model.name);
+        exports.ToLog('CategoryView', 'render');
 
-        this.$el.text(this.model.name);
+        this.$el.text( this.model.Get('name') );
 
         return this;
     }
