@@ -109,9 +109,13 @@ exports.ApiController =
     {
         console.log('ApiController.CategoryDelete');
 
-        var response = JSON.stringify({});
-
-        this.SendJson(res, response);
+        ApiDb.Category.findOne({_id: cat}, function(err, data){
+            if ( !err )
+                data.remove();
+                that.SendJson(res, data);
+            else
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+        });
     },
     ItemsGet: function(req, res, next)
     {
