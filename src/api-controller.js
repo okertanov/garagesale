@@ -173,7 +173,7 @@ exports.ApiController =
             name   = req.params.name        || req.body.name,
             descr  = req.params.description || req.body.description,
             user   = req.params.user        || req.body.user,
-            cat    = req.params.category    || req.body.category;
+            cat    = req.params.cat         || req.body.cat;
 
         ApiDb.Category.findOne({_id: cat}, function(err, data){
             if ( !err )
