@@ -182,7 +182,7 @@ exports.Application = function(options)
                     },
                     success: function(model, response){
                         var categories = new exports.CategoriesCollection();
-                        var categoriesView = new exports.CategoriesView( {collection: categories} );
+                        var categoriesView = new exports.CategoriesView( {collection: categories, el: '#ui-content-categories'} );
                         categories.fetch();
                     }
                 }); // ApplicationView.render() is called when model is changed;
