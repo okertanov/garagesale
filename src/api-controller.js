@@ -111,8 +111,7 @@ exports.ApiController =
 
         ApiDb.Category.findOne({_id: cat}, function(err, data){
             if ( !err )
-                data.remove();
-                that.SendJson(res, data);
+                data.remove(), that.SendJson(res, data);
             else
                 that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
         });
