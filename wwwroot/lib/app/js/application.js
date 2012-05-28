@@ -437,7 +437,8 @@ exports.CategoryView = Backbone.View.extend(
 exports.CategoriesView = Backbone.View.extend(
 {
     tagName: 'ul',
-    className: 'ui-categories-view',
+    className:  'ui-categories-view',
+    className2: 'plate',
     initialize: function()
     {
         exports.ToLog('CategoriesView', 'initialize');
@@ -455,7 +456,18 @@ exports.CategoriesView = Backbone.View.extend(
         this.$el.empty();
 
         var that = this,
-            ul = $('<' + that.tagName + '>').appendTo(that.$el);
+            cont =
+            [
+                '<',
+                    that.tagName,
+                        'class="',
+                        that.className,
+                        ' ',
+                        that.className2,
+                        '"',
+                '>'
+            ],
+            ul = $( cont.join('') ).appendTo(that.$el);
         this.collection.each(function(item){
             var view = new exports.CategoryView({model: item});
             view.render().$el.appendTo( ul );
