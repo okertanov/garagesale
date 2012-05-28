@@ -149,7 +149,7 @@ exports.ApiController =
             else
                 that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
         });
-    }
+    },
     ItemsGetItem: function(req, res, next)
     {
         console.log('ApiController.ItemsGet');
