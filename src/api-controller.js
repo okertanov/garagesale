@@ -174,7 +174,11 @@ exports.ApiController =
             descr  = req.params.description || req.body.description,
             userid = req.params.user        || req.body.user,
             catid  = req.params.category    || req.body.category,
-            item   = new ApiDb.Item({name: name, description: descr, user: userid, category: catid, images: []});
+            item   = new ApiDb.Item({name: name,
+                                    description: descr,
+                                    user: new ApiDb.ObjectId(userid),
+                                    category: new ApiDb.ObjectId(catid),
+                                    images: []});
 
         item.save(function(err){
             if ( !err )

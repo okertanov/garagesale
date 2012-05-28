@@ -20,6 +20,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
+exports.ObjectId = ObjectId;
+
 exports.UserSchema = new Schema({
     name:           { type: String,   required: true  },
     fullname:       { type: String,   required: false },
@@ -41,7 +43,7 @@ exports.ItemSchema = new Schema({
     date:           { type: Date,       required: true,
                         default: Date.now               },
     images:         { type: [String],   required: false },
-    user:           { type: ObjectId,   required: true  },
+    user:           { type: ObjectId,   required: false },
     category:       { type: ObjectId,   required: true  },
     ishot:          { type: Boolean,    required: false },
 });
