@@ -107,7 +107,7 @@ exports.ApiController =
 
                 if ( dirty === true )
                 {
-                    data.update(function(err, data){
+                    data.save(function(err){
                         if ( !err )
                             that.SendJson(res, data);
                         else
