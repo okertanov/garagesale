@@ -176,8 +176,8 @@ exports.ApiController =
             catid  = req.params.category    || req.body.category,
             item   = new ApiDb.Item({name: name,
                                     description: descr,
-                                    user: new Db.ObjectId(userid),
-                                    category: new Db.ObjectId(catid),
+                                    user: Db.ObjectId.fromString(userid),
+                                    category: Db.ObjectId.fromString(catid),
                                     images: []});
 
         item.save(function(err){
