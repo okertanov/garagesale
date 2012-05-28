@@ -176,7 +176,14 @@ exports.Application = function(options)
                     ];
                 var appView = new exports.ApplicationView({model: appModel, subviews: subviews});
 
-                appModel.fetch(); // render() is called when changed;
+                appModel.fetch({
+                    error:   function(model, response){
+                        exports.ToLog(response);
+                    },
+                    success: function(model, response){
+                        exports.ToLog(response);
+                    }
+                }); // ApplicationView.render() is called when model is changed;
             }
             catch(e)
             {
