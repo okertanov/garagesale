@@ -36,7 +36,8 @@ form.navbar-form .btn
 }*/
 
 /* Categories plates */
-.plate{
+.plate
+{
   /* Clear floats */
   overflow: hidden;
   width: 100%;
@@ -46,12 +47,14 @@ form.navbar-form .btn
   list-style: none;
 }
 
-.plate li{
+.plate li
+{
   float: left;
   margin: 0 .5em 0 1em;
 }
 
-.plate a{
+.plate a
+{
   background: #ddd;
   padding: .7em 1em;
   float: left;
@@ -61,12 +64,13 @@ form.navbar-form .btn
   position: relative;
 }
 
-.plate a:hover{
+.plate a:hover
+{
     background: #99db76;
 }
 
-.plate a::before,
-.plate a::after{
+.plate a::before, .plate a::after
+{
   content:'';
   position:absolute;
   top: 0;
@@ -80,25 +84,29 @@ form.navbar-form .btn
   transform: skew(-10deg);
 }
 
-.plate a::before{
+.plate a::before
+{
   left: -.5em;
   -webkit-border-radius: 5px 0 0 5px;
   -moz-border-radius: 5px 0 0 5px;
   border-radius: 5px 0 0 5px;
 }
 
-.plate a:hover::before{
+.plate a:hover::before
+{
   background: #99db76;
 }
 
-.plate a::after{
+.plate a::after
+{
   right: -.5em;
   -webkit-border-radius: 0 5px 5px 0;
   -moz-border-radius: 0 5px 5px 0;
   border-radius: 0 5px 5px 0;
 }
 
-.plate a:hover::after{
+.plate a:hover::after
+{
   background: #99db76;
 }
 /**/

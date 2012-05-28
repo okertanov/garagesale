@@ -429,6 +429,7 @@ exports.CategoryView = Backbone.View.extend(
         exports.ToLog('CategoryView', 'render');
 
         this.$el.text( this.model.get('name') );
+        $('<a href="#">').appendTo( this.$el );
 
         return this;
     }
@@ -469,6 +470,7 @@ exports.CategoriesView = Backbone.View.extend(
                 '>'
             ],
             ul = $( cont.join('') ).appendTo(that.$el);
+
         this.collection.each(function(item){
             var view = new exports.CategoryView({model: item});
             view.render().$el.appendTo( ul );
