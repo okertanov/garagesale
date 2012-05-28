@@ -172,15 +172,15 @@ exports.ApiController =
         var that   = this,
             name   = req.params.name        || req.body.name,
             descr  = req.params.description || req.body.description,
-            userid = req.params.user        || req.body.user,
-            catid  = req.params.category    || req.body.category;
+            user   = req.params.user        || req.body.user,
+            cat    = req.params.category    || req.body.category;
 
         ApiDb.Category.findOne({_id: cat}, function(err, data){
             if ( !err )
             {
                 item   = new ApiDb.Item({name: name,
                                         description: descr,
-                                        user: '',
+                                        user: user,
                                         category: data._id,
                                         images: []});
                 item.save(function(err){
