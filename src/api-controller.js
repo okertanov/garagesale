@@ -173,18 +173,25 @@ exports.ApiController =
             name   = req.params.name        || req.body.name,
             descr  = req.params.description || req.body.description,
             userid = req.params.user        || req.body.user,
-            catid  = req.params.category    || req.body.category,
-            item   = new ApiDb.Item({name: name,
-                                    description: descr,
-                                    user: Db.ObjectId.fromString(userid),
-                                    category: Db.ObjectId.fromString(catid),
-                                    images: []});
+            catid  = req.params.category    || req.body.category;
 
-        item.save(function(err){
+        ApiDb.Category.findOne({_id: cat}, function(err, data){
             if ( !err )
-                that.SendJson(res, cat);
+            {
+                item   = new ApiDb.Item({name: name,
+                                        description: descr,
+                                        user: '',
+                                        category: data._id,
+                                        images: []});
+                item.save(function(err){
+                    if ( !err )
+                        that.SendJson(res, item);
+                    else
+                        that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url + '\nError: ' + err, 400);
+                });
+            }
             else
-                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url + '\nError: ' + err, 400);
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
         });
     },
     ItemsEditItem: function(req, res, next)
