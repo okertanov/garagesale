@@ -443,6 +443,7 @@ exports.CategoriesView = Backbone.View.extend(
         this.collection.view = this;
         this.collection.bind('add',    this.render, this);
         this.collection.bind('remove', this.render, this);
+        this.collection.bind('reset',  this.render, this);
         this.collection.bind('change', this.render, this);
 
         return this;
