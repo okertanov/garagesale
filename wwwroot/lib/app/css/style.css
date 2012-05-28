@@ -51,6 +51,7 @@ form.navbar-form .btn
 {
   float: left;
   margin: 0 .5em 0 1em;
+  padding: 4px;
 }
 
 .plate a
