@@ -180,7 +180,7 @@ exports.ApiController =
             if ( !err )
                 that.SendJson(res, cat);
             else
-                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url + '\nError: ' + err, 400);
         });
     },
     ItemsEditItem: function(req, res, next)
