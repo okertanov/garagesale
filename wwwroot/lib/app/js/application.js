@@ -176,16 +176,28 @@ exports.Application = function(options)
                     ];
                 var appView = new exports.ApplicationView({model: appModel, subviews: subviews});
 
+                // ApplicationView.render() is called when model is changed;
                 appModel.fetch({
                     error:   function(model, response){
                         exports.ToLog(response);
                     },
                     success: function(model, response){
-                        var categories = new exports.CategoriesCollection();
-                        var categoriesView = new exports.CategoriesView( {collection: categories, el: '#ui-content-categories'} );
+                        // Categories
+                        var categories = new exports.CategoriesCollection(),
+                            categoriesView = new exports.CategoriesView( {collection: categories, el: '#ui-content-categories'} );
                         categories.fetch();
+
+                        // Hot/promoted items
+                        var hotItems = new exports.ItemsCollection([], {filter: 'hot'});
+                            hotItemsView = new exports.ItemsView( {collection: hotItems, el: '#ui-content-hot-items'} );
+                        hotItems.fetch();
+
+                        // Recent items
+                        var newItems = new exports.ItemsCollection([], {filter: 'new'});
+                            newItemsView = new exports.ItemsView( {collection: newItems, el: '#ui-content-new-items'} );
+                        newItems.fetch();
                     }
-                }); // ApplicationView.render() is called when model is changed;
+                });
             }
             catch(e)
             {
@@ -311,6 +323,41 @@ exports.CategoriesCollection = Backbone.Collection.extend(
     },
     initialize: function()
     {
+    },
+    validate: function(attributes)
+    {
+    }
+});
+
+exports.ItemModel = Backbone.Model.extend(
+{
+    defaults:
+    {
+    },
+    url: function()
+    {
+        return '/api/item/' + this.catid + '/' + this.id;
+    },
+    initialize: function()
+    {
+        this.id = this.get('_id');
+        this.catid = this.get('category')._id;
+    },
+    validate: function(attributes)
+    {
+    }
+});
+
+exports.ItemsCollection = Backbone.Collection.extend(
+{
+    model: exports.ItemModel,
+    url: function()
+    {
+        return '/api/items' + this.filter ? ('/' + this.filter) : ('');
+    },
+    initialize: function()
+    {
+        this.filter = this.options.filter;
     },
     validate: function(attributes)
     {
@@ -468,6 +515,65 @@ exports.CategoriesView = Backbone.View.extend(
 
         this.collection.each(function(item){
             var view = new exports.CategoryView({model: item});
+            view.render().$el.appendTo( ul );
+        });
+
+        return this;
+    }
+});
+
+exports.ItemView = Backbone.View.extend(
+{
+    tagName: 'li',
+    className: 'ui-item-line',
+    initialize: function()
+    {
+        exports.ToLog('ItemView', 'initialize');
+
+        this.model.view = this;
+        this.model.bind('change', this.render, this);
+
+        return this;
+    },
+    render: function()
+    {
+        exports.ToLog('ItemView', 'render');
+
+        $('<a href="#">').appendTo( this.$el )
+            .text( this.model.get('name') )
+            .attr('title', this.model.get('description') )
+            .attr( 'href', '#items/' + this.model.id );
+
+        return this;
+    }
+});
+
+exports.ItemsView = Backbone.View.extend(
+{
+    tmpl: '#items-view-template',
+    initialize: function()
+    {
+        exports.ToLog('ItemsView', 'initialize');
+
+        this.collection.view = this;
+        this.collection.bind('reset',  this.render, this);
+        this.collection.bind('change', this.render, this);
+
+        return this;
+    },
+    render: function()
+    {
+        exports.ToLog('ItemsView', 'render');
+
+        var that = this,
+            template = _.template($(this.tmpl).html());
+
+        $(this.el).html(template());
+
+        var ul = $(this.el).children('ul');
+
+        this.collection.each(function(item){
+            var view = new exports.ItemView({model: item});
             view.render().$el.appendTo( ul );
         });
 
