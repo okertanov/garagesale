@@ -564,6 +564,8 @@ exports.ItemView = Backbone.View.extend(
             .text( this.model.get('name') )
             .attr('title', this.model.get('description') )
             .attr( 'href', '#items/' + this.model.catid + '/' + this.model.id );
+        $('<p>').appendTo( this.$el )
+            .text( this.model.get('description') );
 
         return this;
     }
