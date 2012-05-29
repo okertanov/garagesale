@@ -143,12 +143,33 @@ exports.ApiController =
         var that = this,
             cat  = req.params.cat;
 
-        ApiDb.Item.find({category: cat}).desc('date').run(function(err, data){
-            if ( !err )
-                that.SendJson(res, data);
-            else
-                that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
-        });
+        if ( cat === 'new' )
+        {
+            ApiDb.Item.find({}).desc('date').run(function(err, data){
+                if ( !err )
+                    that.SendJson(res, data);
+                else
+                    that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+            });
+        }
+        else if ( cat === 'hot' )
+        {
+            ApiDb.Item.find({}).desc('date').run(function(err, data){
+                if ( !err )
+                    that.SendJson(res, data);
+                else
+                    that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+            });
+        }
+        else
+        {
+            ApiDb.Item.find({category: cat}).desc('date').run(function(err, data){
+                if ( !err )
+                    that.SendJson(res, data);
+                else
+                    that.SendError(res, 'Invalid Query: ' + req.method + ' ' + req.url, 400);
+            });
+        }
     },
     ItemsGetItem: function(req, res, next)
     {
