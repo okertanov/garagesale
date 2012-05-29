@@ -179,23 +179,44 @@ exports.Application = function(options)
                 // ApplicationView.render() is called when model is changed;
                 appModel.fetch({
                     error:   function(model, response){
-                        exports.ToLog(response);
+                        exports.ToLog('Error: ', response.statusText);
                     },
                     success: function(model, response){
                         // Categories
                         var categories = new exports.CategoriesCollection(),
                             categoriesView = new exports.CategoriesView( {collection: categories, el: '#ui-content-categories'} );
-                        categories.fetch();
+                        categories.fetch({
+                            error: function(model, response){
+                                exports.ToLog('categories.fetch: Error:', response.statusText);
+                            },
+                            success: function(model, response){
+                                exports.ToLog('categories.fetch: OK:', response.statusText);
+                            }
+                        });
 
                         // Hot/promoted items
                         var hotItems = new exports.ItemsCollection([], {filter: 'hot'}),
                             hotItemsView = new exports.ItemsView( {collection: hotItems, el: '#ui-content-hot-items'} );
-                        hotItems.fetch();
+                        hotItems.fetch({
+                            error: function(model, response){
+                                exports.ToLog('hotItems.fetch: Error:', response.statusText);
+                            },
+                            success: function(model, response){
+                                exports.ToLog('hotItems.fetch: OK:', response.statusText);
+                            }
+                        });
 
                         // Recent items
                         var newItems = new exports.ItemsCollection([], {filter: 'new'}),
                             newItemsView = new exports.ItemsView( {collection: newItems, el: '#ui-content-new-items'} );
-                        newItems.fetch();
+                        newItems.fetch({
+                            error: function(model, response){
+                                exports.ToLog('newItems.fetch: Error:', response.statusText);
+                            },
+                            success: function(model, response){
+                                exports.ToLog('newItems.fetch: OK:', response.statusText);
+                            }
+                        });
                     }
                 });
             }
