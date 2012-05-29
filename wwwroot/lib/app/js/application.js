@@ -188,12 +188,12 @@ exports.Application = function(options)
                         categories.fetch();
 
                         // Hot/promoted items
-                        var hotItems = new exports.ItemsCollection([], {}, {filter: 'hot'});
+                        var hotItems = new exports.ItemsCollection([], {filter: 'hot'});
                             hotItemsView = new exports.ItemsView( {collection: hotItems, el: '#ui-content-hot-items'} );
                         hotItems.fetch();
 
                         // Recent items
-                        var newItems = new exports.ItemsCollection([], {}, {filter: 'new'});
+                        var newItems = new exports.ItemsCollection([], {filter: 'new'});
                             newItemsView = new exports.ItemsView( {collection: newItems, el: '#ui-content-new-items'} );
                         newItems.fetch();
                     }
@@ -357,7 +357,7 @@ exports.ItemsCollection = Backbone.Collection.extend(
     },
     initialize: function(models, options, parameters)
     {
-        this.filter = this.parameters.filter;
+        this.filter = options.filter;
     },
     validate: function(attributes)
     {
