@@ -190,7 +190,7 @@ exports.Application = function(options)
                                 exports.ToLog('categories.fetch: Error:', response.statusText);
                             },
                             success: function(model, response){
-                                exports.ToLog('categories.fetch: OK:', response.statusText);
+                                exports.ToLog('categories.fetch: OK:', response);
                             }
                         });
 
@@ -202,7 +202,7 @@ exports.Application = function(options)
                                 exports.ToLog('hotItems.fetch: Error:', response.statusText);
                             },
                             success: function(model, response){
-                                exports.ToLog('hotItems.fetch: OK:', response.statusText);
+                                exports.ToLog('hotItems.fetch: OK:', response);
                             }
                         });
 
@@ -214,7 +214,7 @@ exports.Application = function(options)
                                 exports.ToLog('newItems.fetch: Error:', response.statusText);
                             },
                             success: function(model, response){
-                                exports.ToLog('newItems.fetch: OK:', response.statusText);
+                                exports.ToLog('newItems.fetch: OK:', response);
                             }
                         });
                     }
@@ -374,7 +374,7 @@ exports.ItemsCollection = Backbone.Collection.extend(
     model: exports.ItemModel,
     url: function()
     {
-        return '/api/items' + this.filter ? ('/' + this.filter) : ('');
+        return ('/api/items' + (this.filter ? ('/' + this.filter) : ('')));
     },
     initialize: function(models, options, parameters)
     {
