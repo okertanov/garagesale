@@ -166,6 +166,8 @@ exports.Application = function(options)
 
             try
             {
+                var that = this;
+
                 // Router
                 this.router = new exports.Router();
                 Backbone.history.start();
@@ -185,7 +187,7 @@ exports.Application = function(options)
                 appModel.fetch({
                     error:   function(model, response){
                         exports.ToLog('Error: ', response.statusText);
-                        this.router.NavigateTo('/500.html');
+                        that.router.NavigateTo('/500.html');
                     },
                     success: function(model, response){
                         // Categories
