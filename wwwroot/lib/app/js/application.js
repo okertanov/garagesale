@@ -191,7 +191,7 @@ exports.Application = function(options)
                     },
                     success: function(model, response){
                         // Start routing
-                        Backbone.history.start({pushState: true});
+                        Backbone.history.start();
 
                         // Categories
                         var categories = new exports.CategoriesCollection(),
