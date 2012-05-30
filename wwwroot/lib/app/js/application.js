@@ -472,7 +472,7 @@ exports.ItemModel = Backbone.Model.extend(
     },
     url: function()
     {
-        return '/api/item/' + this.catid + '/' + this.id;
+        return '/api/items/' + this.catid + '/' + this.id;
     },
     initialize: function()
     {
