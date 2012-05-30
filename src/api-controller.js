@@ -175,13 +175,13 @@ exports.ApiController =
     },
     ItemsGetItem: function(req, res, next)
     {
-        console.log('ApiController.ItemsGetItem', req.params.cat, req.params.id);
+        console.log('ApiController.ItemsGetItem');
 
         var that = this,
             cat  = req.params.cat,
             item = req.params.id;
 
-        ApiDb.Category.findOne({_id: item, category: cat}, function(err, data){
+        ApiDb.Category.findOne({_id: item}, function(err, data){
             if ( !err )
                 that.SendJson(res, data);
             else
