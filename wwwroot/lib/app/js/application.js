@@ -154,6 +154,7 @@ exports.Application = function(options)
     {
         name: 'Garage',
         lang: 'en', /* en, de, fr, lv, etc. */
+        athome: null
     };
 
     var ctx = $.extend({ }, defaults, options);
@@ -199,6 +200,8 @@ exports.Application = function(options)
                             },
                             success: function(model, response){
                                 exports.ToLog('categories.fetch: OK');
+
+                                this.Home();
                             }
                         });
                     }
@@ -224,6 +227,11 @@ exports.Application = function(options)
         },
         Home: function()
         {
+            if ( this.ctx.athome )
+                return false;
+
+            this.ctx.athome = true;
+
             // Hot/promoted items
             var hotItems = new exports.ItemsCollection([], {filter: 'hot'}),
                 hotItemsView = new exports.ItemsView( {collection: hotItems, el: '#ui-content-hot-items'} );
