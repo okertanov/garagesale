@@ -345,13 +345,28 @@ exports.Router = Backbone.Router.extend(
               '<span><strong>Place item</strong></span>' +
           '</div>' +
           '<div class="modal-body">' +
-              '<span></span>' +
+            '<form class="form-horizontal">' +
+                '<fieldset>' +
+                  '<div class="control-group">' +
+                    '<label class="control-label" for="focusedInput">Subject</label>' +
+                    '<div class="controls">' +
+                      '<input class="input-xlarge focused" id="ui-new-post-subject" type="text" value="">' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="form-actions">' +
+                    '<button type="submit" class="btn btn-primary">Save changes</button>' +
+                    '<button class="btn">Cancel</button>' +
+                  '</div>' +
+                '</fieldset>' +
+              '</form>' +
           '</div>' +
           '<div class="modal-footer">' +
               '<a href="#" class="btn btn-primary" data-dismiss="modal">Post</a>' +
               '<a href="#" class="btn" data-dismiss="modal">Close</a>' +
           '</div>' +
           '</div>').modal('show');
+
+        this.NavigateTo('access/home');
     },
     Category: function(cat)
     {
