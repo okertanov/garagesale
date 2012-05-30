@@ -259,6 +259,17 @@ exports.Application = function(options)
             {
                 $('#ui-home-content').hide('fast');
             }
+        },
+        ShowCategory: function(cat, show)
+        {
+            if ( show )
+            {
+                $('#ui-items-content').show('slow');
+            }
+            else
+            {
+                $('#ui-items-content').hide('fast');
+            }
         }
     };
 };
@@ -270,6 +281,7 @@ exports.Router = Backbone.Router.extend(
     {
         ''                  :   'Index',
         'access/home'       :   'Home',
+        'access/post'       :   'Post',
         'category/:cat'     :   'Category',
         'items/:cat/:item'  :   'Item'
     },
@@ -290,10 +302,11 @@ exports.Router = Backbone.Router.extend(
         exports.ToLog('Router', 'Home');
         this.application.ShowHome(true);
     },
-    Category: function()
+    Category: function(cat)
     {
-        exports.ToLog('Router', 'Category');
+        exports.ToLog('Router', 'Category', cat);
         this.application.ShowHome(false);
+        this.application.ShowCategory(cat, true);
     },
     Item: function()
     {
