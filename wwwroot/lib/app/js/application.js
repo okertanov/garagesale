@@ -338,6 +338,21 @@ exports.Router = Backbone.Router.extend(
         this.application.ShowCategory(null, false);
         this.application.ShowHome(true);
     },
+    Post: function()
+    {
+        $('<div class="modal fade" id="ui-post-modal">'  +
+          '<div class="modal-header">' +
+              '<span><strong>Place item</strong></span>' +
+          '</div>' +
+          '<div class="modal-body">' +
+              '<span></span>' +
+          '</div>' +
+          '<div class="modal-footer">' +
+              '<a href="#" class="btn btn-primary" data-dismiss="modal">Post</a>' +
+              '<a href="#" class="btn" data-dismiss="modal">Close</a>' +
+          '</div>' +
+          '</div>').modal('show');
+    },
     Category: function(cat)
     {
         exports.ToLog('Router', 'Category', cat);
