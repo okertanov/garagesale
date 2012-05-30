@@ -181,7 +181,7 @@ exports.ApiController =
             cat  = req.params.cat,
             item = req.params.id;
 
-        ApiDb.Category.findOne({_id: item}, function(err, data){
+        ApiDb.Item.findOne({_id: item, category: cat}, function(err, data){
             if ( !err )
                 that.SendJson(res, data);
             else
