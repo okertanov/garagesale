@@ -286,15 +286,15 @@ exports.Router = Backbone.Router.extend(
     },
     Home: function()
     {
-        this.application.Home(true);
+        this.application.ShowHome(true);
     },
     Category: function()
     {
-        this.application.Home(false);
+        this.application.ShowHome(false);
     },
     Item: function()
     {
-        this.application.Home(false);
+        this.application.ShowHome(false);
     },
     NavigateTo: function(uri)
     {
