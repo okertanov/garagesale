@@ -294,7 +294,7 @@ exports.Application = function(options)
                     },
                     success: function(model, response){
                         exports.ToLog('catItem.fetch: OK');
-                        catItemView.render().$el.appendTo( $('#ui-category-items-content') );
+                        $('#ui-category-items-content').html( catItemView.render().$el );
                     }
                 });
 
@@ -334,16 +334,22 @@ exports.Router = Backbone.Router.extend(
     Home: function()
     {
         exports.ToLog('Router', 'Home');
+        this.application.ShowItem(null, null, false);
+        this.application.ShowCategory(null, false);
         this.application.ShowHome(true);
     },
     Category: function(cat)
     {
         exports.ToLog('Router', 'Category', cat);
+        this.application.ShowItem(null, null, false);
+        this.application.ShowHome(false);
         this.application.ShowCategory(cat, true);
     },
     Item: function(cat, item)
     {
         exports.ToLog('Router', 'Item');
+        this.application.ShowCategory(null, false);
+        this.application.ShowHome(false);
         this.application.ShowItem(cat, item, true);
     },
     NavigateTo: function(uri)
