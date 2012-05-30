@@ -264,11 +264,22 @@ exports.Application = function(options)
         {
             if ( show )
             {
-                $('#ui-items-content').show('slow');
+                var catItems = new exports.ItemsCollection([], {filter: cat}),
+                    catItemsView = new exports.ItemsView( {collection: catItems, el: '#ui-category-items-content'} );
+                catItems.fetch({
+                    error: function(model, response){
+                        exports.ToLog('catItems.fetch: Error:', response.statusText);
+                    },
+                    success: function(model, response){
+                        exports.ToLog('catItems.fetch: OK');
+                    }
+                });
+
+                $('#ui-category-items-content').show('slow');
             }
             else
             {
-                $('#ui-items-content').hide('fast');
+                $('#ui-category-items-content').hide('fast');
             }
         }
     };
