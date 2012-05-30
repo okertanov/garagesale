@@ -281,6 +281,29 @@ exports.Application = function(options)
             {
                 $('#ui-category-items-content').hide('fast');
             }
+        },
+        ShowItem: function(cat, item, show)
+        {
+            if ( show )
+            {
+                var catItem = new exports.ItemModel({category: cat, _id: item}),
+                    catItemView = new exports.ItemView( {model: catItem, el: '#ui-category-items-content'} );
+                catItem.fetch({
+                    error: function(model, response){
+                        exports.ToLog('catItem.fetch: Error:', response.statusText);
+                    },
+                    success: function(model, response){
+                        exports.ToLog('catItem.fetch: OK');
+                        catItemView.render().$el.appendTo( $('#ui-category-items-content') );
+                    }
+                });
+
+                $('#ui-category-items-content').show('slow');
+            }
+            else
+            {
+                $('#ui-category-items-content').hide('fast');
+            }
         }
     };
 };
@@ -316,13 +339,12 @@ exports.Router = Backbone.Router.extend(
     Category: function(cat)
     {
         exports.ToLog('Router', 'Category', cat);
-        this.application.ShowHome(false);
         this.application.ShowCategory(cat, true);
     },
-    Item: function()
+    Item: function(cat, item)
     {
         exports.ToLog('Router', 'Item');
-        this.application.ShowHome(false);
+        this.application.ShowItem(cat, item, true);
     },
     NavigateTo: function(uri)
     {
