@@ -287,7 +287,7 @@ exports.Application = function(options)
             if ( show )
             {
                 var catItem = new exports.ItemModel({category: cat, _id: item}),
-                    catItemView = new exports.ItemView( {model: catItem, el: '#ui-category-items-content'} );
+                    catItemView = new exports.ItemView( {model: catItem} );
                 catItem.fetch({
                     error: function(model, response){
                         exports.ToLog('catItem.fetch: Error:', response.statusText);
