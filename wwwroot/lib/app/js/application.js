@@ -201,7 +201,7 @@ exports.Application = function(options)
                             success: function(model, response){
                                 exports.ToLog('categories.fetch: OK');
 
-                                this.Home();
+                                that.Home();
                             }
                         });
                     }
