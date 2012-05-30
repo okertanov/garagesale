@@ -169,10 +169,6 @@ exports.Application = function(options)
             {
                 var that = this;
 
-                // Router
-                this.router = new exports.Router({application: this});
-                Backbone.history.start();
-
                 // Application
                 var appModel = new exports.ApplicationModel();
 
@@ -191,6 +187,10 @@ exports.Application = function(options)
                         that.router.NavigateToExternal('/500.html');
                     },
                     success: function(model, response){
+                        // Router
+                        this.router = new exports.Router({application: this});
+                        Backbone.history.start();
+
                         // Categories
                         var categories = new exports.CategoriesCollection(),
                             categoriesView = new exports.CategoriesView( {collection: categories, el: '#ui-content-categories'} );
