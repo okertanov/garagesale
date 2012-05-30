@@ -253,7 +253,7 @@ exports.Application = function(options)
         {
             if ( show )
             {
-                $('#ui-home-content').show('slow');
+                $('#ui-home-content').show('fast');
             }
             else
             {
@@ -275,7 +275,7 @@ exports.Application = function(options)
                     }
                 });
 
-                $('#ui-category-items-content').show('slow');
+                $('#ui-category-items-content').show('fast');
             }
             else
             {
@@ -294,11 +294,11 @@ exports.Application = function(options)
                     },
                     success: function(model, response){
                         exports.ToLog('catItem.fetch: OK');
-                        $('#ui-category-items-content').html( catItemView.$el );
+                        $('#ui-category-items-content').html( catItemView.$el.appendTo( $('<ul class="ui-items-view pline">') ) );
                     }
                 });
 
-                $('#ui-category-items-content').show('slow');
+                $('#ui-category-items-content').show('fast');
             }
             else
             {
