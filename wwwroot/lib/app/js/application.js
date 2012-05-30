@@ -368,7 +368,7 @@ exports.Router = Backbone.Router.extend(
                   '<div class="control-group">' +
                     '<label class="control-label" for="ui-new-post-description">Description</label>' +
                     '<div class="controls">' +
-                      '<textarea class="input-xlarge" id="ui-new-post-description" rows="3" value=""></textarea>' +
+                      '<textarea class="input-xlarge" id="ui-new-post-description" rows="5" value=""></textarea>' +
                     '</div>' +
                   '</div>' +
                 '</fieldset>' +
