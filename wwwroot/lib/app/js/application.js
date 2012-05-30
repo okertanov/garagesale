@@ -166,6 +166,11 @@ exports.Application = function(options)
 
             try
             {
+                // Router
+                this.router = new exports.Router();
+                Backbone.history.start();
+
+                // Application
                 var appModel = new exports.ApplicationModel();
 
                 var subviews =
@@ -188,6 +193,7 @@ exports.Application = function(options)
                         categories.fetch({
                             error: function(model, response){
                                 exports.ToLog('categories.fetch: Error:', response.statusText);
+                                this.router.NavigateTo('/500.html');
                             },
                             success: function(model, response){
                                 exports.ToLog('categories.fetch: OK');
@@ -240,6 +246,22 @@ exports.Application = function(options)
         }
     };
 };
+
+/* Router */
+exports.Router = Backbone.Router.extend(
+{
+    routes:
+    {
+        ""          :   "Index"
+    },
+    Index: function()
+    {
+    },
+    NavigateTo: function(uri)
+    {
+        this.navigate(uri, {trigger: true});
+    }
+});
 
 /* Models */
 
