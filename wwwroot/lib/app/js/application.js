@@ -169,6 +169,9 @@ exports.Application = function(options)
             {
                 var that = this;
 
+                // Router
+                that.router = new exports.Router({application: this});
+
                 // Application
                 var appModel = new exports.ApplicationModel();
 
@@ -187,9 +190,8 @@ exports.Application = function(options)
                         that.router.NavigateToExternal('/500.html');
                     },
                     success: function(model, response){
-                        // Router
-                        this.router = new exports.Router({application: this});
-                        Backbone.history.start();
+                        // Start routing
+                        Backbone.history.start({pushState: true});
 
                         // Categories
                         var categories = new exports.CategoriesCollection(),
