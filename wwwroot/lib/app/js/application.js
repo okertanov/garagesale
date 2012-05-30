@@ -390,7 +390,7 @@ exports.ItemModel = Backbone.Model.extend(
     initialize: function()
     {
         this.id = this.get('_id');
-        this.catid = this.get('category')._id;
+        this.catid = this.get('category');
     },
     validate: function(attributes)
     {
@@ -591,7 +591,7 @@ exports.ItemView = Backbone.View.extend(
         $('<a href="#">').appendTo( this.$el )
             .text( this.model.get('name') )
             .attr('title', this.model.get('description') )
-            .attr( 'href', '#items/' + this.model.id );
+            .attr( 'href', '#items/' + this.model.catid + this.model.id );
         $('<p>').appendTo( this.$el )
             .text( this.model.get('description') );
 

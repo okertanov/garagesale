@@ -280,8 +280,8 @@ exports.ApiController =
 
         // -- single item in category or filter (including 'all', and fuzzy queries)
         app.get(    '/api/items/:cat',      function(req, res, next){ that.ItemsGetItems.call(that, req, res, next); }             );
-        app.get(    '/api/items/:cat/:id',  function(req, res, next){ that.ItemsGetItem.call(that, req, res, next); }              );
         app.put(    '/api/items/:cat',      function(req, res, next){ that.ItemsCreateItem.call(that, req, res, next); }           );
+        app.get(    '/api/items/:cat/:id',  function(req, res, next){ that.ItemsGetItem.call(that, req, res, next); }              );
         app.post(   '/api/items/:cat/:id',  function(req, res, next){ that.ItemsEditItem.call(that, req, res, next); }             );
         app.delete( '/api/items/:cat/:id',  function(req, res, next){ that.ItemsDeleteItem.call(that, req, res, next); }           );
 
