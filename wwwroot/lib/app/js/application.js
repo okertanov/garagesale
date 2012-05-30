@@ -256,13 +256,15 @@ exports.Router = Backbone.Router.extend(
 {
     routes:
     {
-        ""              :   'Index',
+        ''              :   'Index',
         'access/home'   :   'Home',
     },
     initialize: function(options)
     {
+        exports.ToLog('Router', 'initialize');
+
         if ( options.application )
-            this.app = options.application;
+            this.application = options.application;
     },
     Index: function()
     {
