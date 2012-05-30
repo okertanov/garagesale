@@ -140,6 +140,8 @@ exports.ApiController =
     },
     ItemsGetItems: function(req, res, next)
     {
+        console.log('ApiController.ItemsGetItems');
+
         var that = this,
             cat  = req.params.cat;
 
@@ -173,7 +175,7 @@ exports.ApiController =
     },
     ItemsGetItem: function(req, res, next)
     {
-        console.log('ApiController.ItemsGet');
+        console.log('ApiController.ItemsGetItem', req.params.cat, req.params.id);
 
         var that = this,
             cat  = req.params.cat,

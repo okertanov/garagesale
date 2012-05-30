@@ -294,7 +294,7 @@ exports.Application = function(options)
                     },
                     success: function(model, response){
                         exports.ToLog('catItem.fetch: OK');
-                        $('#ui-category-items-content').html( catItemView.render().$el );
+                        catItemView.render().$el.appendTo( $('#ui-category-items-content') );
                     }
                 });
 
