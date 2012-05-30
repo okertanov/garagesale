@@ -350,13 +350,13 @@ exports.Router = Backbone.Router.extend(
                   '<div class="control-group">' +
                     '<label class="control-label" for="ui-new-post-subject">Subject</label>' +
                     '<div class="controls">' +
-                      '<input class="span5 focused" id="ui-new-post-subject" type="text" placeholder="">' +
+                      '<input class="span3 focused" id="ui-new-post-subject" type="text" placeholder="">' +
                     '</div>' +
                   '</div>' +
                   '<div class="control-group">' +
                     '<label class="control-label" for="ui-new-post-category">Category</label>' +
                     '<div class="controls">' +
-                      '<select class="span5" id="ui-new-post-category">' +
+                      '<select class="span3" id="ui-new-post-category">' +
                         '<option>1</option>' +
                         '<option>2</option>' +
                         '<option>3</option>' +
@@ -366,7 +366,7 @@ exports.Router = Backbone.Router.extend(
                     '</div>' +
                   '</div>' +
                   '<div class="control-group">' +
-                    '<label class="span5" for="ui-new-post-description">Description</label>' +
+                    '<label class="span3" for="ui-new-post-description">Description</label>' +
                     '<div class="controls">' +
                       '<textarea class="input-xlarge" id="ui-new-post-description" rows="5" placeholder=""></textarea>' +
                     '</div>' +
