@@ -348,14 +348,22 @@ exports.Router = Backbone.Router.extend(
             '<form class="form-horizontal">' +
                 '<fieldset>' +
                   '<div class="control-group">' +
-                    '<label class="control-label" for="focusedInput">Subject</label>' +
+                    '<label class="control-label" for="ui-new-post-subject">Subject</label>' +
                     '<div class="controls">' +
                       '<input class="input-xlarge focused" id="ui-new-post-subject" type="text" value="">' +
                     '</div>' +
                   '</div>' +
-                  '<div class="form-actions">' +
-                    '<button type="submit" class="btn btn-primary">Save changes</button>' +
-                    '<button class="btn">Cancel</button>' +
+                  '<div class="control-group">' +
+                    '<label class="control-label" for="ui-new-post-category">Category</label>' +
+                    '<div class="controls">' +
+                      '<input class="input-xlarge" id="ui-new-post-category" type="select" value="">' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="control-group">' +
+                    '<label class="control-label" for="ui-new-post-description">Description</label>' +
+                    '<div class="controls">' +
+                      '<input class="input-xlarge" id="ui-new-post-description" type="textarea" value="">' +
+                    '</div>' +
                   '</div>' +
                 '</fieldset>' +
               '</form>' +
