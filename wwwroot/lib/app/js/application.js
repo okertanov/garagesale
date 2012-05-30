@@ -251,13 +251,11 @@ exports.Application = function(options)
         {
             if ( show )
             {
-                $('#ui-content-hot-items').show('slow');
-                $('#ui-content-new-items').show('slow');
+                $('#ui-home-content').show('slow');
             }
             else
             {
-                $('#ui-content-hot-items').hide('fast');
-                $('#ui-content-new-items').hide('fast');
+                $('#ui-home-content').hide('fast');
             }
         }
     };
@@ -282,18 +280,22 @@ exports.Router = Backbone.Router.extend(
     },
     Index: function()
     {
+        exports.ToLog('Router', 'Index');
         this.NavigateTo('access/home');
     },
     Home: function()
     {
+        exports.ToLog('Router', 'Home');
         this.application.ShowHome(true);
     },
     Category: function()
     {
+        exports.ToLog('Router', 'Category');
         this.application.ShowHome(false);
     },
     Item: function()
     {
+        exports.ToLog('Router', 'Item');
         this.application.ShowHome(false);
     },
     NavigateTo: function(uri)
