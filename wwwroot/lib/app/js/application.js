@@ -356,13 +356,19 @@ exports.Router = Backbone.Router.extend(
                   '<div class="control-group">' +
                     '<label class="control-label" for="ui-new-post-category">Category</label>' +
                     '<div class="controls">' +
-                      '<input class="input-xlarge" id="ui-new-post-category" type="select" value="">' +
+                      '<select class="input-xlarge" id="ui-new-post-category">' +
+                        '<option>1</option>' +
+                        '<option>2</option>' +
+                        '<option>3</option>' +
+                        '<option>4</option>' +
+                        '<option>5</option>' +
+                      '</select>' +
                     '</div>' +
                   '</div>' +
                   '<div class="control-group">' +
                     '<label class="control-label" for="ui-new-post-description">Description</label>' +
                     '<div class="controls">' +
-                      '<input class="input-xlarge" id="ui-new-post-description" type="textarea" value="">' +
+                      '<textarea class="input-xlarge" id="ui-new-post-description" rows="3" value=""></textarea>' +
                     '</div>' +
                   '</div>' +
                 '</fieldset>' +
