@@ -185,6 +185,7 @@ exports.Application = function(options)
                 appModel.fetch({
                     error:   function(model, response){
                         exports.ToLog('Error: ', response.statusText);
+                        this.router.NavigateTo('/500.html');
                     },
                     success: function(model, response){
                         // Categories
@@ -193,7 +194,6 @@ exports.Application = function(options)
                         categories.fetch({
                             error: function(model, response){
                                 exports.ToLog('categories.fetch: Error:', response.statusText);
-                                this.router.NavigateTo('/500.html');
                             },
                             success: function(model, response){
                                 exports.ToLog('categories.fetch: OK');
