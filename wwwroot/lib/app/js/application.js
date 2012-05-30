@@ -201,7 +201,29 @@ exports.Application = function(options)
                             success: function(model, response){
                                 exports.ToLog('categories.fetch: OK');
 
-                                that.Home();
+                                // Hot/promoted items
+                                var hotItems = new exports.ItemsCollection([], {filter: 'hot'}),
+                                    hotItemsView = new exports.ItemsView( {collection: hotItems, el: '#ui-content-hot-items'} );
+                                hotItems.fetch({
+                                    error: function(model, response){
+                                        exports.ToLog('hotItems.fetch: Error:', response.statusText);
+                                    },
+                                    success: function(model, response){
+                                        exports.ToLog('hotItems.fetch: OK');
+                                    }
+                                });
+
+                                // Recent items
+                                var newItems = new exports.ItemsCollection([], {filter: 'new'}),
+                                    newItemsView = new exports.ItemsView( {collection: newItems, el: '#ui-content-new-items'} );
+                                newItems.fetch({
+                                    error: function(model, response){
+                                        exports.ToLog('newItems.fetch: Error:', response.statusText);
+                                    },
+                                    success: function(model, response){
+                                        exports.ToLog('newItems.fetch: OK');
+                                    }
+                                });
                             }
                         });
                     }
@@ -225,36 +247,18 @@ exports.Application = function(options)
                 exports.ToLog(e, e.toString());
             }
         },
-        Home: function()
+        ShowHome: function(show)
         {
-            if ( this.ctx.athome )
-                return false;
-
-            this.ctx.athome = true;
-
-            // Hot/promoted items
-            var hotItems = new exports.ItemsCollection([], {filter: 'hot'}),
-                hotItemsView = new exports.ItemsView( {collection: hotItems, el: '#ui-content-hot-items'} );
-            hotItems.fetch({
-                error: function(model, response){
-                    exports.ToLog('hotItems.fetch: Error:', response.statusText);
-                },
-                success: function(model, response){
-                    exports.ToLog('hotItems.fetch: OK');
-                }
-            });
-
-            // Recent items
-            var newItems = new exports.ItemsCollection([], {filter: 'new'}),
-                newItemsView = new exports.ItemsView( {collection: newItems, el: '#ui-content-new-items'} );
-            newItems.fetch({
-                error: function(model, response){
-                    exports.ToLog('newItems.fetch: Error:', response.statusText);
-                },
-                success: function(model, response){
-                    exports.ToLog('newItems.fetch: OK');
-                }
-            });
+            if ( show )
+            {
+                $('#ui-content-hot-items').show('slow');
+                $('#ui-content-new-items').show('slow');
+            }
+            else
+            {
+                $('#ui-content-hot-items').hide('fast');
+                $('#ui-content-new-items').hide('fast');
+            }
         }
     };
 };
@@ -264,8 +268,10 @@ exports.Router = Backbone.Router.extend(
 {
     routes:
     {
-        ''              :   'Index',
-        'access/home'   :   'Home',
+        ''                  :   'Index',
+        'access/home'       :   'Home',
+        'category/:cat'     :   'Category',
+        'items/:cat/:item'  :   'Item'
     },
     initialize: function(options)
     {
@@ -280,7 +286,15 @@ exports.Router = Backbone.Router.extend(
     },
     Home: function()
     {
-        this.application.Home();
+        this.application.Home(true);
+    },
+    Category: function()
+    {
+        this.application.Home(false);
+    },
+    Item: function()
+    {
+        this.application.Home(false);
     },
     NavigateTo: function(uri)
     {
