@@ -187,7 +187,7 @@ exports.Application = function(options)
                 appModel.fetch({
                     error:   function(model, response){
                         exports.ToLog('Error: ', response.statusText);
-                        that.router.NavigateTo('/500.html');
+                        that.router.NavigateToExternal('/500.html');
                     },
                     success: function(model, response){
                         // Categories
@@ -262,6 +262,10 @@ exports.Router = Backbone.Router.extend(
     NavigateTo: function(uri)
     {
         this.navigate(uri, {trigger: true});
+    },
+    NavigateToExternal: function(uri)
+    {
+        window.location.href = uri;
     }
 });
 
