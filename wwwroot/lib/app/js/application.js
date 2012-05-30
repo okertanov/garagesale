@@ -169,7 +169,7 @@ exports.Application = function(options)
                 var that = this;
 
                 // Router
-                this.router = new exports.Router();
+                this.router = new exports.Router({application: this});
                 Backbone.history.start();
 
                 // Application
@@ -201,30 +201,6 @@ exports.Application = function(options)
                                 exports.ToLog('categories.fetch: OK');
                             }
                         });
-
-                        // Hot/promoted items
-                        var hotItems = new exports.ItemsCollection([], {filter: 'hot'}),
-                            hotItemsView = new exports.ItemsView( {collection: hotItems, el: '#ui-content-hot-items'} );
-                        hotItems.fetch({
-                            error: function(model, response){
-                                exports.ToLog('hotItems.fetch: Error:', response.statusText);
-                            },
-                            success: function(model, response){
-                                exports.ToLog('hotItems.fetch: OK');
-                            }
-                        });
-
-                        // Recent items
-                        var newItems = new exports.ItemsCollection([], {filter: 'new'}),
-                            newItemsView = new exports.ItemsView( {collection: newItems, el: '#ui-content-new-items'} );
-                        newItems.fetch({
-                            error: function(model, response){
-                                exports.ToLog('newItems.fetch: Error:', response.statusText);
-                            },
-                            success: function(model, response){
-                                exports.ToLog('newItems.fetch: OK');
-                            }
-                        });
                     }
                 });
             }
@@ -245,6 +221,32 @@ exports.Application = function(options)
             {
                 exports.ToLog(e, e.toString());
             }
+        },
+        Home: function()
+        {
+            // Hot/promoted items
+            var hotItems = new exports.ItemsCollection([], {filter: 'hot'}),
+                hotItemsView = new exports.ItemsView( {collection: hotItems, el: '#ui-content-hot-items'} );
+            hotItems.fetch({
+                error: function(model, response){
+                    exports.ToLog('hotItems.fetch: Error:', response.statusText);
+                },
+                success: function(model, response){
+                    exports.ToLog('hotItems.fetch: OK');
+                }
+            });
+
+            // Recent items
+            var newItems = new exports.ItemsCollection([], {filter: 'new'}),
+                newItemsView = new exports.ItemsView( {collection: newItems, el: '#ui-content-new-items'} );
+            newItems.fetch({
+                error: function(model, response){
+                    exports.ToLog('newItems.fetch: Error:', response.statusText);
+                },
+                success: function(model, response){
+                    exports.ToLog('newItems.fetch: OK');
+                }
+            });
         }
     };
 };
@@ -254,10 +256,21 @@ exports.Router = Backbone.Router.extend(
 {
     routes:
     {
-        ""          :   "Index"
+        ""              :   'Index',
+        'access/home'   :   'Home',
+    },
+    initialize: function(options)
+    {
+        if ( options.application )
+            this.app = options.application;
     },
     Index: function()
     {
+        this.NavigateTo('access/home');
+    },
+    Home: function()
+    {
+        this.application.Home();
     },
     NavigateTo: function(uri)
     {
