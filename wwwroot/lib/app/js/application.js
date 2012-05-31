@@ -340,45 +340,8 @@ exports.Router = Backbone.Router.extend(
     },
     Post: function()
     {
-        $('<div class="modal fade" id="ui-post-modal">'  +
-          '<div class="modal-header">' +
-              '<span><strong>Place item</strong></span>' +
-          '</div>' +
-          '<div class="modal-body">' +
-            '<form class="form-horizontal">' +
-                '<fieldset>' +
-                  '<div class="control-group">' +
-                    '<label class="control-label" for="ui-new-post-subject">Subject</label>' +
-                    '<div class="controls">' +
-                      '<input class="input-xlarge focused" id="ui-new-post-subject" type="text" placeholder="">' +
-                    '</div>' +
-                  '</div>' +
-                  '<div class="control-group">' +
-                    '<label class="control-label" for="ui-new-post-category">Category</label>' +
-                    '<div class="controls">' +
-                      '<select class="input-xlarge" id="ui-new-post-category">' +
-                        '<option>1</option>' +
-                        '<option>2</option>' +
-                        '<option>3</option>' +
-                        '<option>4</option>' +
-                        '<option>5</option>' +
-                      '</select>' +
-                    '</div>' +
-                  '</div>' +
-                  '<div class="control-group">' +
-                    '<label class="control-label" for="ui-new-post-description">Description</label>' +
-                    '<div class="controls">' +
-                      '<textarea class="input-xlarge" id="ui-new-post-description" rows="5" placeholder=""></textarea>' +
-                    '</div>' +
-                  '</div>' +
-                '</fieldset>' +
-              '</form>' +
-          '</div>' +
-          '<div class="modal-footer">' +
-              '<a href="#" class="btn btn-primary" data-dismiss="modal">Post</a>' +
-              '<a href="#" class="btn" data-dismiss="modal">Close</a>' +
-          '</div>' +
-          '</div>').modal('show');
+        postItemView = new exports.PostItemView();
+        PostItemView.render().$el.modal('show');
     },
     Category: function(cat)
     {
@@ -762,6 +725,31 @@ exports.ItemsView = Backbone.View.extend(
             var view = new exports.ItemView({model: item});
             view.render().$el.appendTo( ul );
         });
+
+        return this;
+    }
+});
+
+exports.PostItemView = Backbone.View.extend(
+{
+    tagName: '<div>',
+    className: 'ui-post-item-view',
+    tmpl: '#post-item-view-template',
+    initialize: function()
+    {
+        exports.ToLog('PostItemView', 'initialize');
+
+        this.model.view = this;
+        this.model.bind('change', this.render, this);
+
+        return this;
+    },
+    render: function()
+    {
+        exports.ToLog('PostItemView', 'render');
+
+        var template = _.template($(this.tmpl).html());
+        $(this.el).html(template(this.model.toJSON()));
 
         return this;
     }
