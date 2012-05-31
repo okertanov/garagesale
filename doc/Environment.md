@@ -77,6 +77,6 @@ Deploy
     sudo chmod 755 /srv/git/garagesale.git/hooks/post-receive
 
     cd /srv/www
-    sudo git clone /srv/git/garagesale.git garage.espectrale.com
-    sudo chown -R okertanov:okertanov garage.espectrale.com
+    sudo git clone /srv/git/garagesale.git garage.lexiko.me
+    sudo chown -R okertanov:okertanov garage.lexiko.me
 
