@@ -272,10 +272,10 @@ exports.Application = function(options)
                     },
                     success: function(model, response){
                         exports.ToLog('catItems.fetch: OK');
+
+                        $('#ui-category-items-content').show('fast');
                     }
                 });
-
-                $('#ui-category-items-content').show('fast');
             }
             else
             {
@@ -295,10 +295,10 @@ exports.Application = function(options)
                     success: function(model, response){
                         exports.ToLog('catItem.fetch: OK');
                         $('#ui-category-items-content').html( $('<ul class="ui-items-view pline"></ul>').append( catItemView.$el )  );
+
+                        $('#ui-category-items-content').show('fast');
                     }
                 });
-
-                $('#ui-category-items-content').show('fast');
             }
             else
             {
@@ -379,8 +379,6 @@ exports.Router = Backbone.Router.extend(
               '<a href="#" class="btn" data-dismiss="modal">Close</a>' +
           '</div>' +
           '</div>').modal('show');
-
-        this.NavigateTo('access/home');
     },
     Category: function(cat)
     {
