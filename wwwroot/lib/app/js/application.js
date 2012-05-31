@@ -341,11 +341,14 @@ exports.Router = Backbone.Router.extend(
     Post: function()
     {
         var that = this,
-            postItem = new exports.ItemModel(),
-            postItemView = new exports.PostItemView({model: postItem});
+            postItemView = new exports.PostItemView({model: new exports.ItemModel()});
         postItemView.render().$el.modal('show')
             .on('click', '.btn.btn-primary', function () {
                 exports.ToLog('Router', 'Post', 'Modal OK');
+                var name = $('#ui-new-post-subject').val(),
+                    description = $('#ui-new-post-description').val(),
+                    category = $('#ui-new-post-category :selected').val();
+                postItemView.model.save({name: name, description: description, category: category});
             })
             .on('hide', function () {
                 that.NavigateTo('access/home');
