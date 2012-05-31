@@ -343,9 +343,13 @@ exports.Router = Backbone.Router.extend(
         var that = this,
             postItem = new exports.ItemModel(),
             postItemView = new exports.PostItemView({model: postItem});
-        postItemView.render().$el.modal('show').on('hide', function () {
-            that.NavigateTo('access/home');
-        });
+        postItemView.render().$el.modal('show')
+            .on('click', '.btn.btn-primary', function () {
+                exports.ToLog('Router', 'Post', 'Modal OK');
+            })
+            .on('hide', function () {
+                that.NavigateTo('access/home');
+            });
     },
     Category: function(cat)
     {
