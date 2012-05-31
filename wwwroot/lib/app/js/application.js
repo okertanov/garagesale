@@ -342,7 +342,7 @@ exports.Router = Backbone.Router.extend(
     {
         var postItem = new exports.ItemModel(),
             postItemView = new exports.PostItemView({model: postItem});
-        postItemView.render().$el.children('.ui-post-modal').modal('show');
+        postItemView.render().$el.find('#ui-post-item-view-id').modal('show');
     },
     Category: function(cat)
     {
@@ -735,6 +735,7 @@ exports.PostItemView = Backbone.View.extend(
 {
     tagName: 'div',
     className: 'ui-post-item-view',
+    id: 'ui-post-item-view-id',
     tmpl: '#post-item-view-template',
     initialize: function()
     {
