@@ -340,8 +340,8 @@ exports.Router = Backbone.Router.extend(
     },
     Post: function()
     {
-        postItemView = new exports.PostItemView();
-        PostItemView.render().$el.modal('show');
+        var postItemView = new exports.PostItemView();
+        postItemView.render().$el.modal('show');
     },
     Category: function(cat)
     {
