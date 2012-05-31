@@ -341,7 +341,8 @@ exports.Router = Backbone.Router.extend(
     Post: function()
     {
         var postItem = new exports.ItemModel(),
-            postItemView = new exports.PostItemView({model: postItem});
+            el = $('<div>'),
+            postItemView = new exports.PostItemView({model: postItem, el: el});
         postItemView.render().$el.modal('show');
     },
     Category: function(cat)
