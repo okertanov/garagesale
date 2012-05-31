@@ -732,7 +732,7 @@ exports.ItemsView = Backbone.View.extend(
 
 exports.PostItemView = Backbone.View.extend(
 {
-    tagName: '<div>',
+    tagName: 'div',
     className: 'ui-post-item-view',
     tmpl: '#post-item-view-template',
     initialize: function()
