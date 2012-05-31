@@ -464,8 +464,8 @@ exports.FooterModel = Backbone.Model.extend(
         copyyear: (new Date()).getFullYear().toString(),
         author:
         {
-            name: 'Oleg Kertanov',
-            email: 'okertanov@gmail.com'
+            name: 'lexiko.me',
+            email: 'webmaster@lexiko.me'
         }
     },
     url: function()
