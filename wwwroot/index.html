@@ -190,7 +190,7 @@
                             <label class="control-label" for="ui-new-post-category">Category</label>
                             <div class="controls">
                                 <select class="input-xlarge" id="ui-new-post-category">
-                                    <% _.each(categories, function(cat) { %>
+                                    <% _.each(options.categories, function(cat) { %>
                                         <option value="<%= cat._id %>"><%= cat.name %></option>
                                     <% }); %>
                                 </select>
