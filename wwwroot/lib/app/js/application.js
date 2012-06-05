@@ -472,7 +472,7 @@ exports.CategoryModel = Backbone.Model.extend(
     },
     url: function()
     {
-        return '/api/category' + (this.isNew() ? '' : '/' + this.get('_id'));
+        return '/api/category' + ( typeof this.get('_id') !== 'undefined' ? '/' + this.get('_id') : '' );
     },
     initialize: function()
     {
@@ -504,7 +504,7 @@ exports.ItemModel = Backbone.Model.extend(
     },
     url: function()
     {
-        return '/api/items' + '/' + this.get('category') + (this.isNew() ? '' : '/' + this.get('_id'));
+        return '/api/items' + '/' + this.get('category') + ( typeof this.get('_id') !== 'undefined' ? '/' + this.get('_id') : '' );
     },
     initialize: function()
     {
