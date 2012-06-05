@@ -205,6 +205,7 @@ exports.Application = function(options)
                                 exports.ToLog('categories.fetch: OK');
 
                                 that.ctx.categories = categories;
+                                console.dir(that.ctx.categories);
 
                                 // Hot/promoted items
                                 var hotItems = new exports.ItemsCollection([], {filter: 'hot'}),
