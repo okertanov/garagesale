@@ -191,7 +191,7 @@
                             <div class="controls">
                                 <select class="input-xlarge" id="ui-new-post-category">
                                     <% _.each(categories.models, function(cat) { %>
-                                        <option value="<%= cat._id %>"><%= cat.name %></option>
+                                        <option value="<%= cat.get('_id') %>"><%= cat.get('name') %></option>
                                     <% }); %>
                                 </select>
                             </div>
