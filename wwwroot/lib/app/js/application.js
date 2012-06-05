@@ -350,10 +350,11 @@ exports.Router = Backbone.Router.extend(
             );
         postItemView.render().$el.modal('show')
             .on('click', '.btn.btn-primary', function () {
-                exports.ToLog('Router', 'Post', 'Modal OK');
                 var name = $('#ui-new-post-subject').val(),
                     description = $('#ui-new-post-description').val(),
                     category = $('#ui-new-post-category :selected').val();
+
+                exports.ToLog('Router', 'Post', 'Modal OK', name, description, category);
                 postItemView.model.save({name: name, description: description, category: category});
             })
             .on('hide', function () {

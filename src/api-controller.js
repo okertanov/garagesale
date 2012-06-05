@@ -272,19 +272,19 @@ exports.ApiController =
         app.get(    '/api/categories',      function(req, res, next){ that.CategoriesGet.call(that, req, res, next); }             );
         app.get(    '/api/categories/:name/:description',
                                             function(req, res, next){ that.CategoriesCreateCategory.call(that, req, res, next); }  );
-        app.put(    '/api/categories',      function(req, res, next){ that.CategoriesCreateCategory.call(that, req, res, next); }  );
+        app.post(   '/api/categories',      function(req, res, next){ that.CategoriesCreateCategory.call(that, req, res, next); }  );
 
         // -- single category (just info on the category)
         app.get(    '/api/category/:cat',   function(req, res, next){ that.CategoryGet.call(that, req, res, next); }               );
-        app.put(    '/api/category/:cat',   function(req, res, next){ that.ItemsCreateItem.call(that, req, res, next); }           );
-        app.post(   '/api/category/:cat',   function(req, res, next){ that.CategoryEdit.call(that, req, res, next); }              );
+        app.post(   '/api/category/:cat',   function(req, res, next){ that.ItemsCreateItem.call(that, req, res, next); }           );
+        app.put(    '/api/category/:cat',   function(req, res, next){ that.CategoryEdit.call(that, req, res, next); }              );
         app.delete( '/api/category/:cat',   function(req, res, next){ that.CategoryDelete.call(that, req, res, next); }            );
 
         // -- single item in category or filter (including 'all', and fuzzy queries)
         app.get(    '/api/items/:cat',      function(req, res, next){ that.ItemsGetItems.call(that, req, res, next); }             );
-        app.put(    '/api/items/:cat',      function(req, res, next){ that.ItemsCreateItem.call(that, req, res, next); }           );
+        app.post(   '/api/items/:cat',      function(req, res, next){ that.ItemsCreateItem.call(that, req, res, next); }           );
         app.get(    '/api/items/:cat/:id',  function(req, res, next){ that.ItemsGetItem.call(that, req, res, next); }              );
-        app.post(   '/api/items/:cat/:id',  function(req, res, next){ that.ItemsEditItem.call(that, req, res, next); }             );
+        app.put(    '/api/items/:cat/:id',  function(req, res, next){ that.ItemsEditItem.call(that, req, res, next); }             );
         app.delete( '/api/items/:cat/:id',  function(req, res, next){ that.ItemsDeleteItem.call(that, req, res, next); }           );
 
         // -- admin interface (with the same options)
