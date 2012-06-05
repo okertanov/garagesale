@@ -204,8 +204,8 @@ exports.Application = function(options)
                             success: function(model, response){
                                 exports.ToLog('categories.fetch: OK');
 
+                                // Store categories for the offline use
                                 that.ctx.categories = categories;
-                                console.dir(that.ctx.categories);
 
                                 // Hot/promoted items
                                 var hotItems = new exports.ItemsCollection([], {filter: 'hot'}),
