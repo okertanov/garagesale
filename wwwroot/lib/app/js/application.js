@@ -504,7 +504,7 @@ exports.ItemModel = Backbone.Model.extend(
     },
     url: function()
     {
-        return '/api/items/' + this.get('category') + '/' + this.get('_id');
+        return '/api/items/' + this.get('category') + (this.isNew() ? '' : '/' + this.get('_id'));
     },
     initialize: function()
     {
