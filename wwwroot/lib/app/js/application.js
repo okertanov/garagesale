@@ -355,7 +355,11 @@ exports.Router = Backbone.Router.extend(
                     category = $('#ui-new-post-category :selected').val();
 
                 exports.ToLog('Router', 'Post', 'Modal OK', name, description, category);
-                postItemView.model.save({name: name, description: description, category: category});
+                postItemView.model
+                    .set('name', name)
+                    .set('description', description)
+                    .set('category', category);
+                postItemView.model.save();
             })
             .on('hide', function () {
                 that.NavigateTo('access/home');
@@ -468,11 +472,10 @@ exports.CategoryModel = Backbone.Model.extend(
     },
     url: function()
     {
-        return '/api/category/' + this.id;
+        return '/api/category/' + this.get('_id');
     },
     initialize: function()
     {
-        this.id = this.get('_id');
     },
     validate: function(attributes)
     {
@@ -501,12 +504,10 @@ exports.ItemModel = Backbone.Model.extend(
     },
     url: function()
     {
-        return '/api/items/' + this.catid + '/' + this.id;
+        return '/api/items/' + this.get('category') + '/' + this.get('_id');
     },
     initialize: function()
     {
-        this.id = this.get('_id');
-        this.catid = this.get('category');
     },
     validate: function(attributes)
     {
@@ -707,7 +708,7 @@ exports.ItemView = Backbone.View.extend(
         $('<a href="#">').appendTo( this.$el )
             .text( this.model.get('name') )
             .attr('title', this.model.get('description') )
-            .attr( 'href', '#items/' + this.model.catid + '/' + this.model.id );
+            .attr( 'href', '#items/' + this.model.get('category') + '/' + this.model.get('_id') );
         $('<p>').appendTo( this.$el )
             .text( this.model.get('description') );
 
