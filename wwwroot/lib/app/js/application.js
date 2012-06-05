@@ -154,7 +154,8 @@ exports.Application = function(options)
     {
         name: 'Garage',
         lang: 'en', /* en, de, fr, lv, etc. */
-        athome: null
+        athome: null,
+        categories: []
     };
 
     var ctx = $.extend({ }, defaults, options);
@@ -202,6 +203,8 @@ exports.Application = function(options)
                             },
                             success: function(model, response){
                                 exports.ToLog('categories.fetch: OK');
+
+                                that.ctx.categories = categories;
 
                                 // Hot/promoted items
                                 var hotItems = new exports.ItemsCollection([], {filter: 'hot'}),
@@ -341,7 +344,7 @@ exports.Router = Backbone.Router.extend(
     Post: function()
     {
         var that = this,
-            postItemView = new exports.PostItemView({model: new exports.ItemModel()});
+            postItemView = new exports.PostItemView({model: new exports.ItemModel(categories: this.application.ctx.categories)});
         postItemView.render().$el.modal('show')
             .on('click', '.btn.btn-primary', function () {
                 exports.ToLog('Router', 'Post', 'Modal OK');
