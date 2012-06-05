@@ -344,7 +344,9 @@ exports.Router = Backbone.Router.extend(
     Post: function()
     {
         var that = this,
-            postItemView = new exports.PostItemView({model: new exports.ItemModel(categories: this.application.ctx.categories)});
+            postItemView = new exports.PostItemView(
+                    {model: new exports.ItemModel( {categories: this.application.ctx.categories} )} 
+            );
         postItemView.render().$el.modal('show')
             .on('click', '.btn.btn-primary', function () {
                 exports.ToLog('Router', 'Post', 'Modal OK');
