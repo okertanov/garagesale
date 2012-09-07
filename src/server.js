@@ -25,7 +25,7 @@ var os      = require('os'),
 var ApiController = require('./api-controller.js').ApiController;
 
 // Pathes
-var ServerRoot  = __filename,
+var ServerRoot  = __dirname,
     ProjectRoot = path.normalize(ServerRoot + '/../'),
     WWWRoot     = path.normalize(ProjectRoot + '/wwwroot/');
 
